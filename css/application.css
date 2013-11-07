@@ -39,6 +39,13 @@ body, html {
 	margin-top: -5px;
 }
 
+.setTime {
+	text-align: center;
+	font-weight: 200;
+	margin-top: 30px;
+	margin-bottom: -38px;
+}
+
 .ingredients {
 	text-align: center;
 	font-weight: 200;
@@ -48,5 +55,41 @@ body, html {
 
 .bottomBar {
 	bottom: 0px;
+	margin-top: 100px;
+}
+
+.bottomBar2 {
+	bottom: 0px;
 	margin-top: 50px;
+}
+
+.timerSetter{
+	height: 100px;
+}
+
+.bottomBar3 {
+	margin-top: 150px;
+}
+
+.clockSpace {
+	margin-top: 40px;
+}
+
+.adjustButtons{
+	height: 100%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.adjustButton{
+	height: 25%;
+	padding-top:25px;
+	margin-bottom: 15px;
+}
+
+.timerDisplay {
+	font-size: 4em;
+	font-weight: 300;
+	text-align: center;
+	margin-top: 28px;
 }
