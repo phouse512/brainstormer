@@ -11,11 +11,19 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
         <script src="js/source.js"></script>
-        <script src="js/countdown.js"></script>
         <script type='text/javascript'>
             $(document).ready(function() {
-                $(".openPageTwo").on("click", function(){
-                    displayPageTwo();
+                $("#postIt").on("click", function(){
+                    displayPageOne();
+                });
+                $("#BBB").on("click", function(){
+                    displayError();
+                });
+                $("#threeinone").on("click", function(){
+                    displayError();
+                });
+                $("#snake").on("click", function(){
+                    displayError();
                 });
             });
 
@@ -24,17 +32,22 @@
     <body style="overflow:hidden">
         <div class="row displayWindow">
             <div class="col-lg-12 col-xs-12">
-                <h2 class="topSpace">Post-it Brainstorm</h2>
-                <h3 class="centerText">Ingredients:</h3>
-                <h4 class="ingredients">
-                    &#149 post-it notes<br />
-                    &#149 writing utensils <br />
-                    &#149 brainstorming topic <br />
-                </h4>
-                <div class="row bottomBar">
-                    <div class="col-lg-2 col-xs-offset-6 col-lg-offset-9 col-xs-5  col-sm-4 col-sm-offset-6 col-md-3 col-md-offset-7">
-                        <button type="button" class="btn btn-block btn-success openPageTwo">Next</button>
+                <h2 class="topSpace">Welcome</h2>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6">
+                        <img src="img/PostIt.png" id="postIt" class="imgLeft" width="50" height="50" />
                     </div>
+                    <div class="col-xs-6 col-sm-6">
+                        <img src="img/BBB.png" id="BBB" class="imgRight" width="50" height="50" />
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        <img src="img/3in1.png" id="threeinone" class="imgLeft" width="50" height="50" />
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        <img src="img/Snake.png" id="snake" class="imgRight" width="50" height="50" />
+                    </div>                    
+                </div>
+
             </div>
         </div>        
     </body>

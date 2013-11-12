@@ -1,8 +1,15 @@
 body, html {
 	height: 100%;
 	max-width: 400px;
+}
 
-	
+.imgLeft {
+	margin-left: 100px;
+	margin-top: 20px;
+}
+
+.imgRight {
+	margin-top: 20px;
 }
 
 .displayWindow {
