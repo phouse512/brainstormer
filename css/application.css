@@ -12,9 +12,24 @@ body, html {
 	font-family: Futura;
 }
 
+.btn {
+	background: transparent;
+	border: 0px;
+}
+
+.btn:hover {
+	background: transparent;
+}
+
 .imgLeft {
 	margin-left: 100px;
 	margin-top: 20px;
+}
+
+.arrowButton {
+	background: transparent;
+	width: 30px;
+	height: 30px;
 }
 
 .imgRight {
