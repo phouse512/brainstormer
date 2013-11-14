@@ -1,6 +1,15 @@
+@font-face {
+        font-family: 'Futura';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Futura'),
+                url('fonts/Futura.woff') format('woff');
+}
+
 body, html {
 	height: 100%;
 	max-width: 400px;
+	font-family: Futura;
 }
 
 .imgLeft {
@@ -12,39 +21,52 @@ body, html {
 	margin-top: 20px;
 }
 
+.inputSpace {
+	margin-top: 10px;
+}
+
 .displayWindow {
 	height: 100%;
 			/* IE10 Consumer Preview */ 
 	/* IE10 Consumer Preview */ 
-	background-image: -ms-linear-gradient(top left, #1793FF 0%, #2A0CEF 100%);
+	background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #FFFFFF 100%);
 
 	/* Mozilla Firefox */ 
-	background-image: -moz-linear-gradient(top left, #1793FF 0%, #2A0CEF 100%);
+	background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #FFFFFF 100%);
 
 	/* Opera */ 
-	background-image: -o-linear-gradient(top left, #1793FF 0%, #2A0CEF 100%);
+	background-image: -o-linear-gradient(top left, #FFFFFF 0%, #FFFFFF 100%);
 
 	/* Webkit (Safari/Chrome 10) */ 
-	background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #1793FF), color-stop(1, #2A0CEF));
+	background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FFFFFF), color-stop(1, #FFFFFF));
 
 	/* Webkit (Chrome 11+) */ 
-	background-image: -webkit-linear-gradient(top left, #1793FF 0%, #2A0CEF 100%);
+	background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #FFFFFF 100%);
 
 	/* W3C Markup, IE10 Release Preview */ 
-	background-image: linear-gradient(to bottom right, #1793FF 0%, #2A0CEF 100%);
-	color: white;
+	background-image: linear-gradient(to bottom right, #FFFFFF 0%, #FFFFFF 100%);
+	font-family: Futura;
 }
 
 .topSpace {
 	margin-top: 10%;
 	text-align: center;
 	font-weight: 300;
+	font-family: Futura;
 }
 
 .centerText {
 	text-align: center;
 	font-weight: 300;
 	margin-top: -5px;
+	font-family: Futura;
+}
+
+.randomOutput {
+	font-weight: 300;
+	margin-top: -5px;
+	margin-left: 30px;
+	font-family: Futura;
 }
 
 .setTime {
@@ -52,6 +74,7 @@ body, html {
 	font-weight: 200;
 	margin-top: 30px;
 	margin-bottom: -38px;
+	font-family: Futura;
 }
 
 .ingredients {
