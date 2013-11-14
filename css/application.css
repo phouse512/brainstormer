@@ -1,9 +1,9 @@
 @font-face {
-        font-family: 'Futura';
-        font-style: normal;
-        font-weight: normal;
-        src: local('Futura'),
-                url('fonts/Futura.woff') format('woff');
+	font-family: 'Futura';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Futura'),
+		url('fonts/Futura.woff') format('woff');
 }
 
 body, html {
@@ -45,6 +45,7 @@ body, html {
 
 	/* W3C Markup, IE10 Release Preview */ 
 	background-image: linear-gradient(to bottom right, #FFFFFF 0%, #FFFFFF 100%);
+	color: #00000;
 	font-family: Futura;
 }
 
@@ -66,7 +67,7 @@ body, html {
 	font-weight: 300;
 	margin-top: -5px;
 	margin-left: 30px;
-	font-family: Futura;
+	font-family: Futura;s
 }
 
 .setTime {
@@ -82,6 +83,7 @@ body, html {
 	font-weight: 200;
 	line-height: 30px;
 	margin-top: 10px;
+	font-family: Futura;
 }
 
 .bottomBar {
