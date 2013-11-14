@@ -1,3 +1,12 @@
+@font-face {
+	font-family: 'Futura';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Futura'),
+		url('fonts/Futura.woff') format('woff');
+}
+
+
 body, html {
 	height: 100%;
 	max-width: 400px;
