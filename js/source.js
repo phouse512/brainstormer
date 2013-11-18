@@ -103,8 +103,9 @@ function displayPageFourThree(){
 	$(".showPageFiveThree").on("click", function(){
 		var list = new Array();
 		$("input[type=who]").each(function() {
-   			console.log('hi');
-   			list.push($(this).val());
+   			if (!isBlank($(this).val())){
+   				list.push($(this).val());
+   			}
 		});
 
 		whoArray = list;
@@ -121,12 +122,18 @@ function displayPageFiveThree(){
 	$(".showPageSixThree").on("click", function(){
 		var list = new Array();
 		$("input[type=what]").each(function() {
-   			list.push($(this).val());
+   			if (!isBlank($(this).val())){
+   				list.push($(this).val());
+   			}
 		});
 
 		whatArray = list;
 		displayPageSixThree();
 	});
+}
+
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
 }
 
 function displayPageSixThree(){
@@ -137,7 +144,9 @@ function displayPageSixThree(){
 	$(".showPageSevenThree").on("click", function(){
 		var list = new Array();
 		$("input[type=function]").each(function() {
-   			list.push($(this).val());
+   			if (!isBlank($(this).val())){
+   				list.push($(this).val());
+   			}
 		});
 
 		functionArray = list;
