@@ -13,6 +13,11 @@
         <script src="js/source.js"></script>
         <script type='text/javascript'>
             $(document).ready(function() {
+
+
+
+
+                /*
                 $("#postIt").on("click", function(){
                     displayPageOne();
                 });
@@ -24,31 +29,13 @@
                 });
                 $("#snake").on("click", function(){
                     displayError();
-                });
+                });*/
             });
 
         </script>
     </head>
     <body style="overflow:hidden">
-        <div class="row displayWindow">
-            <div class="col-lg-12 col-xs-12">
-                <h2 class="topSpace">Welcome</h2>
-                <div class="row">
-                    <div class="col-xs-6 col-sm-6">
-                        <img src="img/PostIt.png" id="postIt" class="imgLeft" width="50" height="50" />
-                    </div>
-                    <div class="col-xs-6 col-sm-6">
-                        <img src="img/BBB.png" id="BBB" class="imgRight" width="50" height="50" />
-                    </div>
-                    <div class="col-xs-6 col-sm-6">
-                        <img src="img/3in1.png" id="threeinone" class="imgLeft" width="50" height="50" />
-                    </div>
-                    <div class="col-xs-6 col-sm-6">
-                        <img src="img/Snake.png" id="snake" class="imgRight" width="50" height="50" />
-                    </div>                    
-                </div>
-
-            </div>
-        </div>        
+        <button class="btn btn-block btn-danger iconButton backButton"></button>
+        <button class="btn btn-block btn-danger iconButton nextButton"></button>
     </body>
 </html>

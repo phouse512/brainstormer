@@ -1,4 +1,31 @@
-var timerVal = 90;
+function postIt(){
+	var timerVal = 90;
+	var countdownTime;
+	var pages = [];
+}
+
+function threeByOne(){
+	var timerVal = 90;
+	var countdownTime;
+	var pages = [];
+}
+
+function bruteThink(){
+	var timerVal = 90;
+	var countdownTime;
+	var pages = [];
+}
+
+function generateSetTimerPage(heading, defaultTime){
+	
+}
+
+
+
+
+
+
+/*var timerVal = 90;
 
 var whoArray = [];
 var whatArray = [];
@@ -369,5 +396,5 @@ function updateCountdown(){
     $(".countdown").html(minute + ":" + secondsTens + secondsOnes);
 }
 
-
+*/
 

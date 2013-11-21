@@ -5,13 +5,61 @@
 	src: local('Futura'),
 		url('fonts/Futura.woff') format('woff');
 }
+
+body, html {
+	font-family: Futura;
+}
+
+.iconButton{
+	background: transparent;
+	border: 0px;
+	color: #000;
+}
+
+.iconButton:hover{
+	background: transparent;
+	border: 0px;
+	color: #000;
+}
+
+.backButton{
+	background: url("img/BackButton.png");
+	background-size: 30px 30px;
+	height: 30px;
+	width: 30px;
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+}
+
+.nextButton{
+	background: url("img/ForwardButton.png");
+	background-size: 30px 30px;
+	height: 30px;
+	width: 30px;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+.upButton{
+
+}
+
+.downButton{
+
+}
+
+.restartButton{
+
+}
 /*
 body, html {
 	height: 100%;
 	max-width: 400px;
 	font-family: Futura;
 }
-*/
+
 .btn {
 	background: transparent;
 	border: 0px;
@@ -42,29 +90,6 @@ body, html {
 	margin-top: 10px;
 }
 
-.displayWindow {
-	height: 100%;
-			/* IE10 Consumer Preview */ 
-	/* IE10 Consumer Preview */ 
-	background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #FFFFFF 100%);
-
-	/* Mozilla Firefox */ 
-	background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #FFFFFF 100%);
-
-	/* Opera */ 
-	background-image: -o-linear-gradient(top left, #FFFFFF 0%, #FFFFFF 100%);
-
-	/* Webkit (Safari/Chrome 10) */ 
-	background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FFFFFF), color-stop(1, #FFFFFF));
-
-	/* Webkit (Chrome 11+) */ 
-	background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #FFFFFF 100%);
-
-	/* W3C Markup, IE10 Release Preview */ 
-	background-image: linear-gradient(to bottom right, #FFFFFF 0%, #FFFFFF 100%);
-	color: #00000;
-	font-family: Futura;
-}
 
 .topSpace {
 	margin-top: 10%;
@@ -151,4 +176,4 @@ body, html {
 	font-weight: 300;
 	text-align: left;
 	margin-top: 37px;
-}
+}*/
