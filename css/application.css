@@ -5,13 +5,13 @@
 	src: local('Futura'),
 		url('fonts/Futura.woff') format('woff');
 }
-
+/*
 body, html {
 	height: 100%;
 	max-width: 400px;
 	font-family: Futura;
 }
-
+*/
 .btn {
 	background: transparent;
 	border: 0px;
