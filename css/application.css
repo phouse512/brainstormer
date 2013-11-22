@@ -169,6 +169,15 @@ body, html {
 .inputSpace {
 	margin-top: 10px;
 }
+
+.randomWord {
+	margin: 20px auto 20px auto;
+	font-size: 2em;
+}
+
+.randomButton {
+	font-size: 2em;
+}
 /*
 body, html {
 	height: 100%;

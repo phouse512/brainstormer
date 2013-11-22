@@ -23,7 +23,7 @@ function openingPage(){
 		threeInOne();
 	});
 	$("bruteThink").on("click", function(){
-
+		bruteThink();
 	});
 }
 
@@ -58,7 +58,7 @@ function postIt(){
 		page_counter = RESTART_PAGE;
 		clearInterval(timerIntervalID);
 		$(".restartButton").hide();
-		$(".pageContent").html(pages[page_counter]);
+		$(".pageContent").html(pages[page_counter].html());
 	});
 	$(".backButton").on("click", function(){
 		if(page_counter > 0){
@@ -67,10 +67,11 @@ function postIt(){
 			}
 			page_counter--;
 		} else {
+			clearInterval(timerIntervalID);
 			openingPage();
 			return;
 		}
-		$(".pageContent").html(pages[page_counter]);
+		$(".pageContent").html(pages[page_counter].html());
 		if(page_counter == SET_TIMER_PAGE){
 			updateTimer(timerVal);
 			clearInterval(timerIntervalID);
@@ -82,10 +83,11 @@ function postIt(){
 	$(".nextButton").on("click", function(){
 		page_counter++;
 		if(page_counter >= pages.length){
+			clearInterval(timerIntervalID);
 			openingPage();
 			return;
 		}
-		$(".pageContent").html(pages[page_counter]);
+		$(".pageContent").html(pages[page_counter].html());
 		if(page_counter == SET_TIMER_PAGE){
 			updateTimer(timerVal);
 		}
@@ -118,7 +120,7 @@ function postIt(){
         updateTimer(timerVal);
 	});
 
-	$(".pageContent").html(pages[page_counter]);
+	$(".pageContent").html(pages[page_counter].html());
 }
 
 function threeInOne(){
@@ -165,7 +167,7 @@ function threeInOne(){
 		page_counter = RESTART_PAGE;
 		clearInterval(timerIntervalID);
 		$(".restartButton").hide();
-		$(".pageContent").html(pages[page_counter]);
+		$(".pageContent").html(pages[page_counter].html());
 	});
 	$(".backButton").on("click", function(){
 		if(page_counter > 0){
@@ -189,10 +191,11 @@ function threeInOne(){
 			}
 			page_counter--;
 		} else {
+			clearInterval(timerIntervalID);
 			openingPage();
 			return;
 		}
-		$(".pageContent").html(pages[page_counter]);
+		$(".pageContent").html(pages[page_counter].html());
 		if(page_counter == SET_TIMER_PAGE){
 			updateTimer(timerVal);
 			clearInterval(timerIntervalID);
@@ -219,6 +222,7 @@ function threeInOne(){
 		}
 		page_counter++;
 		if(page_counter >= pages.length){
+			clearInterval(timerIntervalID);
 			openingPage();
 			return;
 		} else if(page_counter == RANDOM_PAGE){
@@ -243,19 +247,13 @@ function threeInOne(){
 					where_array.push(value);
 				}
 			});
-			console.log(who_array);
-			console.log(what_array);
-			console.log(where_array);
 			currentWho = who_array[Math.floor(Math.random()*who_array.length)];
 			currentWhat = what_array[Math.floor(Math.random()*what_array.length)];
 			currentWhere = where_array[Math.floor(Math.random()*where_array.length)];
-			console.log(currentWho);
-			console.log(currentWhat);
-			console.log(currentWhere);
 			pages[RANDOM_PAGE] = generateStandardPage("Use this combination to generate concepts around your overarching product idea", "", ["Who&#58 " + currentWho, "What&#58 " + currentWhat, "Where&#58 " + currentWhere]);
 			pages[COUNTDOWN_PAGE] = generateCountdownPage(["Who&#58 " + currentWho, "What&#58 " + currentWhat, "Where&#58 " + currentWhere], timerVal);
 		}
-		$(".pageContent").html(pages[page_counter]);
+		$(".pageContent").html(pages[page_counter].html());
 		if(page_counter == SET_TIMER_PAGE){
 			updateTimer(timerVal);
 		}
@@ -288,7 +286,7 @@ function threeInOne(){
         updateTimer(timerVal);
 	});
 
-	$(".pageContent").html(pages[page_counter]);
+	$(".pageContent").html(pages[page_counter].html());
 }
 
 function bruteThink(){
@@ -296,6 +294,125 @@ function bruteThink(){
 	var countdownTime;
 	var pages = [];
 	var page_counter = 0;
+
+	var timerIntervalID;
+	var SET_TIMER_PAGE = 5;
+	var COUNTDOWN_PAGE = 6;
+	var RESTART_PAGE = 2; //the page that you jump to when you hit restart
+	var RANDOM_PAGE = 2;
+	var currentWord = ""
+	var text_file = "brutethink-nouns.txt";
+	var dictionary = [];
+	var pagesRequiringUpdates = [3, 4]; //contains the index of every page that has currentWord in it, so that we can update them when currentWord changes
+
+	pages.push(generateStandardPage("Brute Think", "Ingredients&#58", ["paper and pens", "1-5 people", "a problem you want to reframe"]));
+	pages.push(generateStandardPage("Let's Get Started!", "Basic Rules&#58", ["focus on quantity", "withhold criticism", "welcome unusual ideas"]));
+	pages.push(generateRandomWordPage("Pick a Random Word!"));
+	pages.push(generateStandardPage("Think about the variety of things that are associated with <span>" + currentWord + "</span>. What are its characteristics? What does it do? What can you do with it?"));
+	pages.push(generateStandardPage("Draw a picture of <span>" + currentWord + "</span> and think about similarities, connections, and associations between <span>" + currentWord + "</span> and your problem"));
+	pages.push(generateSetTimerPage("List your ideas", timerVal));
+	pages.push(generateCountdownPage("", timerVal));
+	pages.push(generateStandardPage("Have everyone share their list"));
+	pages.push(generateStandardPage("By forcing connections between these two things, you can get a different perspective."));
+
+	readFile(text_file, function(data){
+		dictionary = storeDictionary(data);
+	});
+
+	$(".backButton").off("click");
+	$(".nextButton").off("click");
+	$(".restartButton").off("click");
+	$(".restartButton").hide();
+	$(".backButton").show();
+	$(".nextButton").show();
+	$(".pageContent").off("click");
+	$(".restartButton").on("click", function(){
+		page_counter = RESTART_PAGE;
+		clearInterval(timerIntervalID);
+		$(".restartButton").hide();
+		$(".pageContent").html(pages[page_counter].html());
+	});
+	$(".backButton").on("click", function(){
+		if(page_counter > 0){
+			if(page_counter == pages.length-1){
+				$(".restartButton").hide();
+			}
+			page_counter--;
+		} else {
+			clearInterval(timerIntervalID);
+			openingPage();
+			return;
+		}
+		$(".pageContent").html(pages[page_counter].html());
+		if(page_counter == SET_TIMER_PAGE){
+			updateTimer(timerVal);
+			clearInterval(timerIntervalID);
+		}
+		if(page_counter == COUNTDOWN_PAGE){
+			updateTimer(countdownTime);
+		}
+	});
+	$(".nextButton").on("click", function(){
+		page_counter++;
+		if(page_counter >= pages.length){
+			clearInterval(timerIntervalID);
+			openingPage();
+			return;
+		}
+		if(page_counter == RANDOM_PAGE){
+			if(currentWord.length <= 0){ //if word hasn't been set
+				currentWord = dictionary[Math.floor(Math.random()*dictionary.length)];
+				updatePages();
+			}
+		}
+		$(".pageContent").html(pages[page_counter].html());
+		if(page_counter == SET_TIMER_PAGE){
+			updateTimer(timerVal);
+		}
+		if(page_counter == COUNTDOWN_PAGE){
+			countdownTime = timerVal;
+			updateTimer(countdownTime);
+			timerIntervalID = setInterval(function(){
+		        if(countdownTime == 0){
+		            clearInterval(timerIntervalID);
+		        } else {
+		            countdownTime--;
+		        }
+		        updateTimer(countdownTime);
+		    }, 1000);
+		}
+		if(page_counter == pages.length-1){
+			$(".restartButton").show();
+		}
+	});
+	$(".pageContent").on("click", ".upButton", function(){
+		if(timerVal < 570){
+            timerVal += 30;
+        }
+        updateTimer(timerVal);
+	});
+	$(".pageContent").on("click", ".downButton", function(){
+		if(timerVal > 30){
+            timerVal -= 30;
+        }
+        updateTimer(timerVal);
+	});
+	$(".pageContent").on("click", ".randomButton", function(){
+		currentWord = dictionary[Math.floor(Math.random()*dictionary.length)];
+		updatePages();
+		$(".randomWord").html(currentWord);
+	});
+
+	$(".pageContent").html(pages[page_counter].html());
+
+	function updatePages(){
+		pages[RANDOM_PAGE].find(".randomWord").html(currentWord);
+		for(i = 0; i < pagesRequiringUpdates.length; i++){
+			pages[pagesRequiringUpdates[i]].find("span").each(function(){
+				$(this).html(currentWord);
+			});
+		}
+	}
 }
 
 function generateSetTimerPage(heading, defaultTime){
@@ -385,6 +502,16 @@ function generateInputPage(prompt, placeholder){
 	return page;
 }
 
+function generateRandomWordPage(heading){
+	var page = $("<div class='pageContent'>");
+	if(heading){
+		page.append("<h2>" + heading + "</h2>");
+	}
+	page.append("<div class='randomWord'></div>");
+	page.append("<button class='btn btn-success randomButton'>Pick Again!</button>");
+	return page;
+}
+
 function updateTimer(timerVal){
 	var minute = Math.floor(timerVal/60);
 	var seconds = timerVal - (minute*60);
@@ -392,6 +519,24 @@ function updateTimer(timerVal){
 	var secondsOnes = seconds-secondsTens*10
 	
 	$(".clock").html(minute + ":" + secondsTens + secondsOnes);
+}
+
+function readFile(file, callback){
+	$.ajax({
+		url: file,
+		type: 'GET',
+		dataType: 'text',
+		success: function(data, textStatus, xhr){
+			callback(data);
+		},
+		error: function(xhr, textStatus, errorThrown){
+			console.log(xhr + textStatus + errorThrown);
+		}
+	});
+}
+
+function storeDictionary(textData){
+	return textData.split(" ");
 }
 
 
