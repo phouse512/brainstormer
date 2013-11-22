@@ -22,7 +22,7 @@ function openingPage(){
 	$("#threeinone").on("click", function(){
 		threeInOne();
 	});
-	$("bruteThink").on("click", function(){
+	$("#bruteThink").on("click", function(){
 		bruteThink();
 	});
 }
@@ -33,6 +33,7 @@ function postIt(){
 	var pages = [];
 	var page_counter = 0;
 	var timerIntervalID;
+	var backIntervalID;
 	var SET_TIMER_PAGE = 3;
 	var COUNTDOWN_PAGE = 4;
 	var RESTART_PAGE = 2; //the page that you jump to when you hit restart
@@ -61,6 +62,7 @@ function postIt(){
 		$(".pageContent").html(pages[page_counter].html());
 	});
 	$(".backButton").on("click", function(){
+		resetBG(backIntervalID);
 		if(page_counter > 0){
 			if(page_counter == pages.length-1){
 				$(".restartButton").hide();
@@ -81,6 +83,7 @@ function postIt(){
 		}
 	});
 	$(".nextButton").on("click", function(){
+		resetBG(backIntervalID);
 		page_counter++;
 		if(page_counter >= pages.length){
 			clearInterval(timerIntervalID);
@@ -97,6 +100,7 @@ function postIt(){
 			timerIntervalID = setInterval(function(){
 		        if(countdownTime == 0){
 		            clearInterval(timerIntervalID);
+		            backIntervalID = setInterval(bgFlashing, 500);
 		        } else {
 		            countdownTime--;
 		        }
@@ -129,6 +133,7 @@ function threeInOne(){
 	var pages = [];
 	var page_counter = 0;
 	var timerIntervalID;
+	var backIntervalID;
 	var SET_TIMER_PAGE = 7;
 	var COUNTDOWN_PAGE = 8;
 	var RESTART_PAGE = 2; //the page that you jump to when you hit restart
@@ -170,6 +175,7 @@ function threeInOne(){
 		$(".pageContent").html(pages[page_counter].html());
 	});
 	$(".backButton").on("click", function(){
+		resetBG(backIntervalID);
 		if(page_counter > 0){
 			if(page_counter == pages.length-1){
 				$(".restartButton").hide();
@@ -205,6 +211,7 @@ function threeInOne(){
 		}
 	});
 	$(".nextButton").on("click", function(){
+		resetBG(backIntervalID);
 		if(page_counter == WHO_PAGE){
 			for(i = 1; i <= 5; i++){
 				pages[page_counter].find("#who" + i).val($("#who" + i).val());
@@ -263,6 +270,7 @@ function threeInOne(){
 			timerIntervalID = setInterval(function(){
 		        if(countdownTime == 0){
 		            clearInterval(timerIntervalID);
+		            backIntervalID = setInterval(bgFlashing, 500);
 		        } else {
 		            countdownTime--;
 		        }
@@ -296,6 +304,7 @@ function bruteThink(){
 	var page_counter = 0;
 
 	var timerIntervalID;
+	var backIntervalID;
 	var SET_TIMER_PAGE = 5;
 	var COUNTDOWN_PAGE = 6;
 	var RESTART_PAGE = 2; //the page that you jump to when you hit restart
@@ -333,6 +342,7 @@ function bruteThink(){
 		$(".pageContent").html(pages[page_counter].html());
 	});
 	$(".backButton").on("click", function(){
+		resetBG(backIntervalID);
 		if(page_counter > 0){
 			if(page_counter == pages.length-1){
 				$(".restartButton").hide();
@@ -353,6 +363,7 @@ function bruteThink(){
 		}
 	});
 	$(".nextButton").on("click", function(){
+		resetBG(backIntervalID);
 		page_counter++;
 		if(page_counter >= pages.length){
 			clearInterval(timerIntervalID);
@@ -375,6 +386,7 @@ function bruteThink(){
 			timerIntervalID = setInterval(function(){
 		        if(countdownTime == 0){
 		            clearInterval(timerIntervalID);
+		            backIntervalID = setInterval(bgFlashing, 500);
 		        } else {
 		            countdownTime--;
 		        }
@@ -537,6 +549,19 @@ function readFile(file, callback){
 
 function storeDictionary(textData){
 	return textData.split(" ");
+}
+
+function bgFlashing(){
+	var colors = ["#0099cc","#fff"];
+
+	var bodybgarrayno = Math.floor(Math.random() * colors.length);
+    var selectedcolor = colors[bodybgarrayno];
+    $("body").css("background-color",selectedcolor);
+}
+
+function resetBG(id){
+	clearInterval(id);
+	$("body").css("background-color", "#fff");
 }
 
 
