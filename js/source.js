@@ -8,7 +8,7 @@ var currentWho;
 var currentWhat;
 var currentFunction;
 
-var opener = '<div class="col-lg-12 col-xs-12"><h2 class="topSpace">Welcome</h2><div class="row"><div class="col-xs-6 col-lg-offset-4 col-xs-offset-4 col-sm-6"><div class="row"><div class="col-xs-4 col-lg-4"><img src="img/PostIt.png" id="postIt" class="" width="50" height="50" /></div><div class="col-xs-8 col-lg-8"><p>Post-Its</p></div></div><div style="margin-top: 20px" class="row"><div class="col-xs-4 col-lg-4"><img src="img/3in1.png" id="postIt" class="" width="50" height="50" /></div><div class="col-xs-8 col-lg-8"><p>3 in 1</p></div></div></div></div></div>';
+var opener = '<div class="col-lg-12 col-xs-12"><h2 class="topSpace">Welcome</h2><div class="row"><div class="col-xs-6 col-lg-offset-4 col-xs-offset-4 col-sm-6"><div class="row"><div class="col-xs-4 col-lg-4"><img src="img/PostIt.png" id="postIt" class="" width="50" height="50" /></div><div class="col-xs-8 col-lg-8"><p>Post-Its</p></div></div><div style="margin-top: 20px" class="row"><div class="col-xs-4 col-lg-4"><img src="img/3in1.png" id="threeinone" class="" width="50" height="50" /></div><div class="col-xs-8 col-lg-8"><p>3 in 1</p></div></div></div></div></div>';
 var page1 = '<div class="col-lg-12 col-xs-12"><h2 class="topSpace">Post-it Brainstorm</h2><h3 class="centerText">Ingredients:</h3><h4 class="ingredients">&#149 post-it notes<br />&#149 writing utensils <br />&#149 brainstorming topic <br /></h4><div class="row bottomBar"><div class="row bottomBar"><div class="col-lg-2 col-xs-offset-1 col-xs-5"><button type="image" class="btn btn-block btn-danger showHomePage"><img src="img/BackButton.png" style="cursor:pointer" class="arrowButton"></button></div><div class="col-lg-2 col-xs-offset-6 col-lg-offset-9 col-xs-5  col-sm-4 col-sm-offset-6 col-md-3 col-md-offset-7"><button type="image" class="btn btn-block btn-success openPageTwo"><img src = "img/ForwardButton.png" style ="cursor:pointer" class="arrowButton"></button></div></div>';
 var page2 = '<div class="col-lg-12 col-xs-12"><h2 class="topSpace">Let\'s Get Started!</h2><h3 class="centerText">Basic Rules:</h3><h4 class="ingredients">&#149 focus on quantity<br />&#149 withhold criticism<br />&#149 welcome unusual ideas<br /></h4><div class="row bottomBar"><div class="col-lg-2 col-xs-offset-1 col-xs-5"><button type="image" class="btn btn-block btn-danger showPageOne"><img src="img/BackButton.png" style="cursor:pointer" class="arrowButton"></button></div><div class="col-lg-2 col-lg-offset-9 col-xs-5  col-sm-4 col-sm-offset-6 col-md-3 col-md-offset-7"><button type="image" class="btn btn-block btn-success showPageThree"><img src="img/ForwardButton.png" style="cursor:pointer" class="arrowButton"></button></button></div></div>';
 var page3 = '<div class="col-lg-12 col-xs-12"><h2 class="topSpace">Brief the group on the problem you would like to solve!</h2><div class="row bottomBar"><div class="col-lg-2 col-xs-offset-1 col-xs-5"><button type="image" class="btn btn-block btn-danger showPageTwo"><img src="img/BackButton.png" style="cursor:pointer" class="arrowButton"></button></div><div class="col-lg-2 col-lg-offset-9 col-xs-5  col-sm-4 col-sm-offset-6 col-md-3 col-md-offset-7"><button type="image" class="btn btn-block btn-success showPageFour"><img src="img/ForwardButton.png" style="cursor:pointer" class="arrowButton"></button></button></div></div>';
@@ -52,14 +52,8 @@ function displayOpener(){
 	$("#postIt").on("click", function() {
 		displayPageOne();
 	});
-	$("#BBB").on("click", function(){
-	    displayError();
-	});
 	$("#threeinone").on("click", function(){
 	    displayPageOneThree();
-	});
-	$("#snake").on("click", function(){
-	    displayError();
 	});
 }
 
@@ -96,6 +90,15 @@ function displayPageThreeThree(){
 function displayPageFourThree(){
 	$(".displayWindow").html(page4Three).slideDown(1000);
 
+	var i =0;
+	$("input[type=who]").each(function(){
+		if(typeof whoArray[i] == 'undefined'){
+			i=i+1;
+		} else {
+			$(this).val(whoArray[i]);
+			i = i+1;
+		}
+	});
 
 	$(".showPageThreeThree").on("click", function(){
 		displayPageThreeThree();
@@ -115,6 +118,16 @@ function displayPageFourThree(){
 
 function displayPageFiveThree(){
 	$(".displayWindow").html(page5Three).slideDown(1000);
+
+	var i = 0;
+	$("input[type=what]").each(function(){
+		if(typeof whatArray[i] == 'undefined'){
+			i=i+1;
+		} else {
+			$(this).val(whatArray[i]);
+			i = i+1;
+		}
+	});
 	$(".showPageFourThree").on("click", function(){
 		displayPageFourThree();
 
@@ -138,6 +151,16 @@ function isBlank(str) {
 
 function displayPageSixThree(){
 	$(".displayWindow").html(page6Three).slideDown(1000);
+	var i =0;
+	$("input[type=function]").each(function(){
+		if(typeof functionArray[i] == 'undefined'){
+			i=i+1;
+		} else {
+			$(this).val(functionArray[i]);
+			i = i+1;
+		}
+	});
+
 	$(".showPageFiveThree").on("click", function(){
 		displayPageFiveThree();
 	});
