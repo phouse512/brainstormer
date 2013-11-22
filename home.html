@@ -13,6 +13,12 @@
         <script src="js/source.js"></script>
         <script type='text/javascript'>
             $(document).ready(function() {
+                openingPage();
+                //var newHTML = generateRandomWordPage("Pick a Random Word!").html();
+                //$(".pageContent").html(newHTML);
+                //bruteThink();
+
+                /*
                 $("#postIt").on("click", function(){
                     displayPageOne();
                 });
@@ -24,38 +30,18 @@
                 });
                 $("#snake").on("click", function(){
                     displayError();
-                });
+                });*/
             });
 
         </script>
     </head>
     <body style="overflow:hidden">
-        <div class="row displayWindow">
-            <div class="col-lg-12 col-xs-12">
-                <h2 class="topSpace">Welcome</h2>
-                <div class="row">
-                    <div class="col-xs-6 col-lg-offset-4 col-xs-offset-4 col-sm-6">
-                        <div class="row">
-                            <div class="col-xs-4 col-lg-4">
-                                <img src="img/PostIt.png" id="postIt" class="" width="50" height="50" />
-                            </div>
-                            <div class="col-xs-8 col-lg-8">
-                                <p>Post-Its</p>
-                            </div>
-                        </div>
-                        <div style="margin-top: 20px" class="row">
-                            <div class="col-xs-4 col-lg-4">
-                                <img src="img/3in1.png" id="threeinone" class="" width="50" height="50" />
-                            </div>
-                            <div class="col-xs-8 col-lg-8">
-                                <p>3 in 1</p>
-                            </div>
-                        </div>
-
-                    </div>              
-                </div>
-
-            </div>
-        </div>        
+        <div class="pageContent">
+        </div>
+        <div class="navigationBar">
+            <button class="btn btn-danger iconButton backButton"></button>
+            <button class="btn btn-danger iconButton nextButton"></button>
+            <button class="btn btn-danger iconButton restartButton"></button>
+        </div>
     </body>
 </html>
