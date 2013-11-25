@@ -482,12 +482,12 @@ function generateCountdownPage(heading, defaultTime){
 }
 
 function generateStandardPage(h2, h3, listArray){
-	var page = $("<div class='pageContent'>");
+	var page = $("<div class='pageContent'><div class='heading'>");
 	if(h2){
-		page.append("<h2>" + h2 + "</h2>");
+		page.find('.heading').append("<h2>" + h2 + "</h2>");
 	}
 	if(h3){
-		page.append("<h3>" + h3 + "</h3>");
+		page.find('.heading').append("<h3>" + h3 + "</h3>");
 	}
 	if(listArray){
 		var listHTML = "<ul>";

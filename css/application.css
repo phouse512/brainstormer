@@ -11,10 +11,16 @@ body, html {
 	text-align: center;
 }
 
+
+#page {
+	padding: 10px;
+}
+
 .pageContent{
 	font-family: Futura;
 	margin: auto;
 	text-align: center;
+	padding: 10px;
 }
 
 .pageContent h2, .pageContent h3{
@@ -27,6 +33,10 @@ body, html {
 	font-weight: 200;
 	list-style-position: inside;
 	padding: 0px;
+	font-size: 1.5em;
+	text-align: center;
+	padding: 15px;
+	list-style-type: none;
 }
 
 .techniqueList {
@@ -83,40 +93,37 @@ body, html {
 	bottom: 10px;
 }
 
-.iconButton{
+.iconButton, .iconButton:hover{
 	border: 0px;
 }
 
-.iconButton:hover{
-	border: 0px;
-}
 
 .backButton{
 	background: url("img/BackButton.png");
-	background-size: 30px 30px;
-	height: 30px;
-	width: 30px;
+	background-size: 60px 60px;
+	height: 60px;
+	width: 60px;
 	margin: 0px;
 	float:left;
 }
 
-.backButton:hover{
+.backButton:hover, .backButton:focus{
 	background: url("img/BackButton.png");
-	background-size: 30px 30px;
+	background-size: 60px 60px;
 }
 
 .nextButton{
 	background: url("img/ForwardButton.png");
-	background-size: 30px 30px;
-	height: 30px;
-	width: 30px;
+	background-size: 60px 60px;
+	height: 60px;
+	width: 60px;
 	margin:0px;
 	float: right;
 }
 
-.nextButton:hover{
+.nextButton:hover, .nextButton:focus{
 	background: url("img/ForwardButton.png");
-	background-size: 30px 30px;
+	background-size: 60px 60px;
 }
 
 .upButton{
@@ -128,7 +135,7 @@ body, html {
 	margin-bottom: 30px;
 }
 
-.upButton:hover{
+.upButton:hover, .upButton:focus{
 	background: url("img/Up Buttons.png");
 	background-size: 25px 25px;
 }
@@ -141,23 +148,23 @@ body, html {
 	float: left;
 }
 
-.downButton:hover{
+.downButton:hover, .downButton:focus{
 	background: url("img/DownButtons.png");
 	background-size: 25px 25px;
 }
 
 .restartButton{
 	background: url("img/BBB.png");
-	background-size: 30px 30px;
-	height: 30px;
-	width: 30px;
+	background-size: 60px 60px;
+	height: 60px;
+	width: 60px;
 	display: block;
 	margin:auto;
 }
 
-.restartButton:hover{
+.restartButton:hover, .restartButton:focus{
 	background: url("img/BBB.png");
-	background-size: 30px 30px;
+	background-size: 60px 60px;
 }
 
 .inputForm {
