@@ -27,6 +27,17 @@ function openingPage(){
 	});
 }
 
+function dynamicHeight(){
+	height = $(document).height();
+	if(height > 750){
+		$("ul").css("line-height", "100px");
+	} else if (height < 750 & height > 400 ) {
+		$("ul").css("line-height", "60px");
+	} else {
+		$("ul").css("line-height", "40px");
+	}
+}
+
 function postIt(){
 	var timerVal = 90;
 	var countdownTime;
