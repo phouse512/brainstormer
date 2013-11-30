@@ -11,11 +11,12 @@ function openingPage(){
 	page.append("<h2>Welcome!</h2>");
 	page.append("<div class='techniqueList'></div>");
 	var tlist = page.find(".techniqueList");
-	tlist.append("<div class='technique'><img src='css/img/PostIt.png' id='postIt' class='techniqueImg'><div class='techniqueDesc'>Generate lots of ideas - Post-It</div></div>");
+	tlist.append("<div class='technique'><img src='css/img/PostIt.png' id='postIt' class='techniqueImg'><div class='techniqueDesc'><p>Generate lots of ideas</p><p>Post-It</p></div></div>");
 	tlist.append("<div class='technique'><img src='css/img/3in1.png' id='threeinone' class='techniqueImg'><div class='techniqueDesc'>Create new product concepts - 3 X 1</div></div>");
-	tlist.append("<div class='technique'><img src='css/img/brute think.png' id='bruteThink' class='techniqueImg'><div class='techniqueDesc'>Reframe your problem - Brute Think</div></div>");
+	tlist.append("<div class='technique'><img src='css/img/brute think.png' id='bruteThink' class='techniqueImg'><div class='techniqueDesc'><p>Reframe your problem</p><p>Brute Think</p></div></div>");
 
 	$(".pageContent").html(page.html());
+	$("#threeinone").parent().hide();
 	$("#postIt").on("click", function(){
 		postIt();
 	});
@@ -28,6 +29,7 @@ function openingPage(){
 }
 
 function dynamicHeight(){
+	console.log("Dynamic Height");
 	height = $(document).height();
 	if(height > 750){
 		$("ul").css("line-height", "100px");
@@ -84,7 +86,8 @@ function postIt(){
 			openingPage();
 			return;
 		}
-		$(".pageContent").html(pages[page_counter].html());
+		$(".pageContent").html(pages[page_counter]["html"].html());
+		pages[page_counter]["backFn"]();
 		if(page_counter == SET_TIMER_PAGE){
 			updateTimer(timerVal);
 			clearInterval(timerIntervalID);
@@ -101,7 +104,8 @@ function postIt(){
 			openingPage();
 			return;
 		}
-		$(".pageContent").html(pages[page_counter].html());
+		$(".pageContent").html(pages[page_counter]["html"].html());
+		pages[page_counter]["nextFn"]();
 		if(page_counter == SET_TIMER_PAGE){
 			updateTimer(timerVal);
 		}
@@ -135,7 +139,8 @@ function postIt(){
         updateTimer(timerVal);
 	});
 
-	$(".pageContent").html(pages[page_counter].html());
+	$(".pageContent").html(pages[page_counter]["html"].html());
+	pages[page_counter]["nextFn"]();
 }
 
 function threeInOne(){
@@ -438,7 +443,8 @@ function bruteThink(){
 	}
 }
 
-function generateSetTimerPage(heading, defaultTime){
+function generateSetTimerPage(heading, defaultTime, nextAction, backAction){
+	var page_obj = {};
 	var page = $("<div class='pageContent'>");
 	page.append("<div class='timerHeader'></div>");
 	page.append("<div class='timerContainer'></div>");
@@ -462,10 +468,12 @@ function generateSetTimerPage(heading, defaultTime){
 
 		page.find(".timerContainer").html("<div class='timerDisplay'><h4>Set Time</h4><div class='timerButtons'><button class='btn btn-info iconButton upButton'></button><button class='btn btn-info iconButton downButton'></button></div><div class='clock'>" + minute + " : " + secondsTens + secondsOnes + "</div></div>");
 	}
-	return page;
+	page_obj["html"] = page;
+	return page_obj;
 }
 
-function generateCountdownPage(heading, defaultTime){
+function generateCountdownPage(heading, defaultTime, nextAction, backAction){
+	var page_obj = {};
 	var page = $("<div class='pageContent'>");
 	page.append("<div class='timerHeader'></div>");
 	page.append("<div class='timerContainer'></div>");
@@ -489,10 +497,12 @@ function generateCountdownPage(heading, defaultTime){
 
 		page.find(".timerContainer").html("<div class='timerDisplay'><div class='clock'>" + minute + " : " + secondsTens + secondsOnes + "</div></div>");
 	}
-	return page;
+	page_obj["html"] = page;
+	return page_obj;
 }
 
-function generateStandardPage(h2, h3, listArray){
+function generateStandardPage(h2, h3, listArray, nextAction, backAction){
+	var page_obj = {};
 	var page = $("<div class='pageContent'><div class='heading'>");
 	if(h2){
 		page.find('.heading').append("<h2>" + h2 + "</h2>");
@@ -508,10 +518,19 @@ function generateStandardPage(h2, h3, listArray){
 		listHTML += "</ul>";
 		page.append(listHTML);
 	}
-	return page;
+	page_obj["html"] = page;
+	page_obj["nextFn"] = function(){
+		if(nextAction) nextAction();
+		dynamicHeight();
+	}
+	page_obj["backFn"] = function(){
+		if(backAction) backAction();
+		dynamicHeight();
+	}
+	return page_obj;
 }
 
-function generateInputPage(prompt, placeholder){
+function generateInputPage(prompt, placeholder, nextAction, backAction){
 	var page = $("<div class='pageContent'>");
 	if(prompt){
 		page.append("<h2>" + prompt + "</h2>");
@@ -525,7 +544,7 @@ function generateInputPage(prompt, placeholder){
 	return page;
 }
 
-function generateRandomWordPage(heading){
+function generateRandomWordPage(heading, nextAction, backAction){
 	var page = $("<div class='pageContent'>");
 	if(heading){
 		page.append("<h2>" + heading + "</h2>");
