@@ -72,7 +72,7 @@ function postIt(){
 		page_counter = RESTART_PAGE;
 		clearInterval(timerIntervalID);
 		$(".restartButton").hide();
-		$(".pageContent").html(pages[page_counter].html());
+		$(".pageContent").html(pages[page_counter]["html"].html());
 	});
 	$(".backButton").on("click", function(){
 		resetBG(backIntervalID);
@@ -188,7 +188,7 @@ function threeInOne(){
 		page_counter = RESTART_PAGE;
 		clearInterval(timerIntervalID);
 		$(".restartButton").hide();
-		$(".pageContent").html(pages[page_counter].html());
+		$(".pageContent").html(pages[page_counter]["html"].html());
 	});
 	$(".backButton").on("click", function(){
 		resetBG(backIntervalID);
@@ -198,17 +198,17 @@ function threeInOne(){
 			}
 			if(page_counter == WHO_PAGE){
 				for(i = 1; i <= 5; i++){
-					pages[page_counter].find("#who" + i).val($("#who" + i).val());
+					pages[page_counter]["html"].find("#who" + i).val($("#who" + i).val());
 				}
 			}
 			else if(page_counter == WHAT_PAGE){
 				for(i = 1; i <= 5; i++){
-					pages[page_counter].find("#what" + i).val($("#what" + i).val());
+					pages[page_counter]["html"].find("#what" + i).val($("#what" + i).val());
 				}
 			}
 			else if(page_counter == WHERE_PAGE){
 				for(i = 1; i <= 5; i++){
-					pages[page_counter].find("#where" + i).val($("#where" + i).val());
+					pages[page_counter]["html"].find("#where" + i).val($("#where" + i).val());
 				}
 			}
 			page_counter--;
@@ -217,7 +217,7 @@ function threeInOne(){
 			openingPage();
 			return;
 		}
-		$(".pageContent").html(pages[page_counter].html());
+		$(".pageContent").html(pages[page_counter]["html"].html());
 		if(page_counter == SET_TIMER_PAGE){
 			updateTimer(timerVal);
 			clearInterval(timerIntervalID);
@@ -230,17 +230,17 @@ function threeInOne(){
 		resetBG(backIntervalID);
 		if(page_counter == WHO_PAGE){
 			for(i = 1; i <= 5; i++){
-				pages[page_counter].find("#who" + i).val($("#who" + i).val());
+				pages[page_counter]["html"].find("#who" + i).val($("#who" + i).val());
 			}
 		}
 		else if(page_counter == WHAT_PAGE){
 			for(i = 1; i <= 5; i++){
-				pages[page_counter].find("#what" + i).val($("#what" + i).val());
+				pages[page_counter]["html"].find("#what" + i).val($("#what" + i).val());
 			}
 		}
 		else if(page_counter == WHERE_PAGE){
 			for(i = 1; i <= 5; i++){
-				pages[page_counter].find("#where" + i).val($("#where" + i).val());
+				pages[page_counter]["html"].find("#where" + i).val($("#where" + i).val());
 			}
 		}
 		page_counter++;
@@ -252,19 +252,19 @@ function threeInOne(){
 			who_array = [];
 			where_array = [];
 			what_array = [];
-			pages[WHO_PAGE].find("input[type=who]").each(function(){
+			pages[WHO_PAGE]["html"].find("input[type=who]").each(function(){
 				var value = $(this).val();
 				if(value.length > 0){
 					who_array.push(value);
 				}
 			});
-			pages[WHAT_PAGE].find("input[type=what]").each(function(){
+			pages[WHAT_PAGE]["html"].find("input[type=what]").each(function(){
 				var value = $(this).val();
 				if(value.length > 0){
 					what_array.push(value);
 				}
 			});
-			pages[WHERE_PAGE].find("input[type=where]").each(function(){
+			pages[WHERE_PAGE]["html"].find("input[type=where]").each(function(){
 				var value = $(this).val();
 				if(value.length > 0){
 					where_array.push(value);
@@ -276,7 +276,7 @@ function threeInOne(){
 			pages[RANDOM_PAGE] = generateStandardPage("Use this combination to generate concepts around your overarching product idea", "", ["Who&#58 " + currentWho, "What&#58 " + currentWhat, "Where&#58 " + currentWhere]);
 			pages[COUNTDOWN_PAGE] = generateCountdownPage(["Who&#58 " + currentWho, "What&#58 " + currentWhat, "Where&#58 " + currentWhere], timerVal);
 		}
-		$(".pageContent").html(pages[page_counter].html());
+		$(".pageContent").html(pages[page_counter]["html"].html());
 		if(page_counter == SET_TIMER_PAGE){
 			updateTimer(timerVal);
 		}
@@ -310,7 +310,7 @@ function threeInOne(){
         updateTimer(timerVal);
 	});
 
-	$(".pageContent").html(pages[page_counter].html());
+	$(".pageContent").html(pages[page_counter]["html"].html());
 }
 
 function bruteThink(){
@@ -355,7 +355,7 @@ function bruteThink(){
 		page_counter = RESTART_PAGE;
 		clearInterval(timerIntervalID);
 		$(".restartButton").hide();
-		$(".pageContent").html(pages[page_counter].html());
+		$(".pageContent").html(pages[page_counter]["html"].html());
 	});
 	$(".backButton").on("click", function(){
 		resetBG(backIntervalID);
@@ -369,7 +369,7 @@ function bruteThink(){
 			openingPage();
 			return;
 		}
-		$(".pageContent").html(pages[page_counter].html());
+		$(".pageContent").html(pages[page_counter]["html"].html());
 		if(page_counter == SET_TIMER_PAGE){
 			updateTimer(timerVal);
 			clearInterval(timerIntervalID);
@@ -392,7 +392,7 @@ function bruteThink(){
 				updatePages();
 			}
 		}
-		$(".pageContent").html(pages[page_counter].html());
+		$(".pageContent").html(pages[page_counter]["html"].html());
 		if(page_counter == SET_TIMER_PAGE){
 			updateTimer(timerVal);
 		}
@@ -431,12 +431,12 @@ function bruteThink(){
 		$(".randomWord").html(currentWord);
 	});
 
-	$(".pageContent").html(pages[page_counter].html());
+	$(".pageContent").html(pages[page_counter]["html"].html());
 
 	function updatePages(){
-		pages[RANDOM_PAGE].find(".randomWord").html(currentWord);
+		pages[RANDOM_PAGE]["html"].find(".randomWord").html(currentWord);
 		for(i = 0; i < pagesRequiringUpdates.length; i++){
-			pages[pagesRequiringUpdates[i]].find("span").each(function(){
+			pages[pagesRequiringUpdates[i]]["html"].find("span").each(function(){
 				$(this).html(currentWord);
 			});
 		}
