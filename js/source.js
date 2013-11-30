@@ -531,6 +531,7 @@ function generateStandardPage(h2, h3, listArray, nextAction, backAction){
 }
 
 function generateInputPage(prompt, placeholder, nextAction, backAction){
+	var page_obj = {};
 	var page = $("<div class='pageContent'>");
 	if(prompt){
 		page.append("<h2>" + prompt + "</h2>");
@@ -540,18 +541,20 @@ function generateInputPage(prompt, placeholder, nextAction, backAction){
 	for(i = 1; i <= 5; i++){
 		form.append("<input type=" + placeholder + " class='form-control inputSpace' id='" + placeholder + i + "' placeholder='" + placeholder + "'>");
 	}
-
-	return page;
+	page_obj["html"] = page;
+	return page_obj;
 }
 
 function generateRandomWordPage(heading, nextAction, backAction){
+	var page_obj = {};
 	var page = $("<div class='pageContent'>");
 	if(heading){
 		page.append("<h2>" + heading + "</h2>");
 	}
 	page.append("<div class='randomWord'></div>");
 	page.append("<button class='btn btn-success randomButton'>Pick Again!</button>");
-	return page;
+	page_obj["html"] = page;
+	return page_obj;
 }
 
 function updateTimer(timerVal){
