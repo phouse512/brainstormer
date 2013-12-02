@@ -377,6 +377,7 @@ function bruteThink(){
 	pages.push(generateStandardPage("Draw a picture of <span style= 'color: #FF8000'>" + currentWord + "</span> and think about similarities, connections, and associations between <span style= 'color: #FF8000'>" + currentWord + "</span> and your problem"));
 	pages.push(generateSetTimerPage("List your ideas", timerVal,
 		function(){
+			console.log("On Set Timer Page");
 			updateTimer(timerVal);
 		},
 		function(){
@@ -385,7 +386,17 @@ function bruteThink(){
 		}));
 	pages.push(generateCountdownPage("", timerVal, 
 		function(){
-
+			countdownTime = timerVal;
+			updateTimer(countdownTime);
+			timerIntervalID = setInterval(function(){
+		        if(countdownTime == 0){
+		            clearInterval(timerIntervalID);
+		            backIntervalID = setInterval(bgFlashing, 500);
+		        } else {
+		            countdownTime--;
+		        }
+		        updateTimer(countdownTime);
+		    }, 1000);
 		},
 		function(){
 			updateTimer(countdownTime);
@@ -398,22 +409,16 @@ function bruteThink(){
 
 	$(".backButton").off("click");
 	$(".nextButton").off("click");
-	$(".restartButton").off("click");
-	$(".restartButton").hide();
 	$(".backButton").show();
 	$(".nextButton").show();
 	$(".pageContent").off("click");
-	$(".restartButton").on("click", function(){
-		page_counter = RESTART_PAGE;
-		clearInterval(timerIntervalID);
-		$(".restartButton").hide();
-		$(".pageContent").html(pages[page_counter]["html"].html());
-	});
 	$(".backButton").on("click", function(){
 		resetBG(backIntervalID);
 		if(page_counter > 0){
 			if(page_counter == pages.length-1){
-				$(".restartButton").hide();
+				page_counter = RESTART_PAGE;
+				clearInterval(timerIntervalID);
+				$(".pageContent").html(pages[page_counter]["html"].html());
 			}
 			page_counter--;
 		} else {
@@ -422,6 +427,7 @@ function bruteThink(){
 			return;
 		}
 		$(".pageContent").html(pages[page_counter]["html"].html());
+		pages[page_counter]["backFn"]();
 	});
 	$(".nextButton").on("click", function(){
 		resetBG(backIntervalID);
@@ -438,22 +444,7 @@ function bruteThink(){
 			}
 		}
 		$(".pageContent").html(pages[page_counter]["html"].html());
-		if(page_counter == COUNTDOWN_PAGE){
-			countdownTime = timerVal;
-			updateTimer(countdownTime);
-			timerIntervalID = setInterval(function(){
-		        if(countdownTime == 0){
-		            clearInterval(timerIntervalID);
-		            backIntervalID = setInterval(bgFlashing, 500);
-		        } else {
-		            countdownTime--;
-		        }
-		        updateTimer(countdownTime);
-		    }, 1000);
-		}
-		if(page_counter == pages.length-1){
-			$(".restartButton").show();
-		}
+		pages[page_counter]["nextFn"]();
 	});
 	$(".pageContent").on("click", ".upButton", function(){
 		if(timerVal < 570){
@@ -474,6 +465,7 @@ function bruteThink(){
 	});
 
 	$(".pageContent").html(pages[page_counter]["html"].html());
+	pages[page_counter]["nextFn"]();
 
 	function updatePages(){
 		pages[RANDOM_PAGE]["html"].find(".randomWord").html(currentWord);
