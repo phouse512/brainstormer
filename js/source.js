@@ -51,14 +51,15 @@ function postIt(){
 	var COUNTDOWN_PAGE = 4;
 	var RESTART_PAGE = 2; //the page that you jump to when you hit restart
 
-	pages.push(generateStandardPage("Post-It Brainstorm", "Ingredients&#58", ["post-it notes", "writing utensils", "brainstorming topic"]));
+	pages.push(generateStandardPage("Post-It Brainstorm", "Ingredients&#58", ["post-it notes", "writing utensils", "3+ people", "open wall", "brainstorming topic"]));
 	pages.push(generateStandardPage("Let's Get Started!", "Basic Rules&#58", ["focus on quantity", "withhold criticism", "welcome unusual ideas"]));
 	pages.push(generateStandardPage("Brief the group on the problem you would like to solve!"));
-	pages.push(generateSetTimerPage("Individually write ideas on post-its", timerVal));
-	pages.push(generateCountdownPage("", timerVal));
-	pages.push(generateStandardPage("Put Up Post-Its!"));
-	pages.push(generateStandardPage("", "Discuss Ideas&#58", ["Go one by one", "Explain each thought"]));
-	pages.push(generateStandardPage("", "Group Common Ideas", ["group by type", "i.e. location, theme"]));
+	pages.push(generateSetTimerPage("Tell everyone to individually write ideas on ideas on post-its. Write or draw one idea per post-it. Set timer from 1 to 5 minutes.", timerVal));
+	pages.push(generateCountdownPage("Starting timer countdown!", timerVal));
+	pages.push(generateStandardPage("Put Up Post-Its! Everyone please place them on the wall and gather around to discuss"));
+	pages.push(generateStandardPage("", "Discuss Ideas&#58", ["Go one by one", "Explain each thought", "keep it brief"]));
+	pages.push(generateStandardPage("", "Group Common Ideas", ["Group by type", "i.e. location, theme"]));
+	pages.push(generateFinalPage("Now focus on the best ideas or grouped themes and reframe your problem as a team. Press back to start a new iteration or press forward to file away your ideas and return to the main menu.",));
 
 
 	$(".backButton").off("click");
@@ -330,6 +331,8 @@ function bruteThink(){
 	var dictionary = [];
 	var pagesRequiringUpdates = [3, 4]; //contains the index of every page that has currentWord in it, so that we can update them when currentWord changes
 
+	var query = "https://www.google.com/search?q="+currentWord+"&rlz=1C1LENN_enUS500US500&espv=210&es_sm=122&source=lnms&tbm=isch&sa=X&ei=Yl-ZUtjCLoj6oASM8YH4CA&ved=0CAkQ_AUoAQ&biw=1364&bih=706";
+
 	pages.push(generateStandardPage("Brute Think", "Ingredients&#58", ["paper and pens", "1-5 people", "a problem you want to reframe"]));
 	pages.push(generateStandardPage("Let's Get Started!", "Basic Rules&#58", ["focus on quantity", "withhold criticism", "welcome unusual ideas"]));
 	pages.push(generateRandomWordPage("Pick a Random Word!"));
@@ -498,6 +501,36 @@ function generateCountdownPage(heading, defaultTime, nextAction, backAction){
 		page.find(".timerContainer").html("<div class='timerDisplay'><div class='clock'>" + minute + " : " + secondsTens + secondsOnes + "</div></div>");
 	}
 	page_obj["html"] = page;
+	return page_obj;
+}
+
+function generateFinalPage(h2, h3, listArray, nextAction, backAction){
+	var page_obj = {};
+	var page = $("<div class='pageContent'><div class='heading'>");
+	if(h2){
+		page.find('.heading').append("<h2>" + h2 + "</h2>");
+	}
+	if(h3){
+		page.find('.heading').append("<h3>" + h3 + "</h3>");
+	}
+	if(listArray){
+		var listHTML = "<ul>";
+		for(i = 0; i < listArray.length; i++){
+			listHTML += "<li>" + listArray[i] + "</li>";
+		}
+		listHTML += "</ul>";
+		page.append(listHTML);
+	}
+	page_obj["html"] = page;
+	page_obj["nextFn"] = function(){
+		if(nextAction) nextAction();
+		dynamicHeight();
+	}
+	page_obj["backFn"] = function(){
+		page_counter = 2;
+		if(backAction) backAction();
+		dynamicHeight();
+	}
 	return page_obj;
 }
 
