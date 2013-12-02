@@ -355,7 +355,7 @@ function threeInOne(){
 }
 
 function bruteThink(){
-	var timerVal = 90;
+	var timerVal = 300;
 	var countdownTime;
 	var pages = [];
 	var page_counter = 0;
@@ -375,17 +375,27 @@ function bruteThink(){
 
 	pages.push(generateStandardPage("Brute Think", "Ingredients&#58", ["paper and pens", "1-5 people", "a problem you want to reframe stated in the form of a question,","for example:","How can I increase traffic to my website?","How do I improve relationship with my boss?","How can I get my kids to eat vegetables?"]));
 	pages.push(generateStandardPage("Let's Get Started!", "Basic Rules&#58", ["focus on quantity", "withhold criticism", "welcome unusual ideas"]));
-	pages.push(generateRandomWordPage("Pick a Random Word!"));
+	pages.push(generateRandomWordPage("Pick a Random Word!",
+		function(){
+			if(currentWord.length <= 0){ //if word hasn't been set
+				currentWord = dictionary[Math.floor(Math.random()*dictionary.length)];
+				updatePages();
+				$(".randomWord").html(currentWord);
+			}
+		}));
 	pages.push(generateStandardPage("Write down a list of things that are associated with <span class = 'randomWordColor'>" + currentWord + "</span>. What are its characteristics? What does it do? What can you do with it?"));
 	pages.push(generateStandardPage("Draw a picture of <span class = 'randomWordColor'>" + currentWord + "</span> and think about similarities, connections, and associations between <span class = 'randomWordColor'>" + currentWord + "</span> and your problem"));
 	pages.push(generateSetTimerPage("List your ideas", timerVal,
 		function(){
-			console.log("On Set Timer Page");
 			updateTimer(timerVal);
+			$(".upButton").hide();
+			$(".downButton").hide();
 		},
 		function(){
 			updateTimer(timerVal);
 			clearInterval(timerIntervalID);
+			$(".upButton").hide();
+			$(".downButton").hide();
 		}));
 	pages.push(generateCountdownPage("", timerVal, 
 		function(){
@@ -441,12 +451,6 @@ function bruteThink(){
 			clearInterval(timerIntervalID);
 			openingPage();
 			return;
-		}
-		if(page_counter == RANDOM_PAGE){
-			if(currentWord.length <= 0){ //if word hasn't been set
-				currentWord = dictionary[Math.floor(Math.random()*dictionary.length)];
-				updatePages();
-			}
 		}
 		$(".pageContent").html(pages[page_counter]["html"].html());
 		pages[page_counter]["nextFn"]();
