@@ -187,9 +187,12 @@ body, html {
 	margin-top: 10px;
 }
 
+
 .randomWord {
 	margin: 20px auto 20px auto;
-	font-size: 2em;
+	font-size: 4em;
+	color: #FF8000;
+	font-style: 
 }
 
 .randomButton {

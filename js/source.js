@@ -370,11 +370,11 @@ function bruteThink(){
 
 	var query = "https://www.google.com/search?q="+currentWord+"&rlz=1C1LENN_enUS500US500&espv=210&es_sm=122&source=lnms&tbm=isch&sa=X&ei=Yl-ZUtjCLoj6oASM8YH4CA&ved=0CAkQ_AUoAQ&biw=1364&bih=706";
 
-	pages.push(generateStandardPage("Brute Think", "Ingredients&#58", ["paper and pens", "1-5 people", "a problem you want to reframe"]));
+	pages.push(generateStandardPage("Brute Think", "Ingredients&#58", ["paper and pens", "1-5 people", "a problem you want to reframe stated in the form of a question,","for example:","How can I increase traffic to my website?","How do I improve relationship with my boss?","How can I get my kids to eat vegetables?"]));
 	pages.push(generateStandardPage("Let's Get Started!", "Basic Rules&#58", ["focus on quantity", "withhold criticism", "welcome unusual ideas"]));
 	pages.push(generateRandomWordPage("Pick a Random Word!"));
-	pages.push(generateStandardPage("Think about the variety of things that are associated with <span>" + currentWord + "</span>. What are its characteristics? What does it do? What can you do with it?"));
-	pages.push(generateStandardPage("Draw a picture of <span>" + currentWord + "</span> and think about similarities, connections, and associations between <span>" + currentWord + "</span> and your problem"));
+	pages.push(generateStandardPage("Write down a list of things that are associated with <span style ='color: #FF8000'>" + currentWord + "</span>. What are its characteristics? What does it do? What can you do with it?"));
+	pages.push(generateStandardPage("Draw a picture of <span style= 'color: #FF8000'>" + currentWord + "</span> and think about similarities, connections, and associations between <span style= 'color: #FF8000'>" + currentWord + "</span> and your problem"));
 	pages.push(generateSetTimerPage("List your ideas", timerVal,
 		function(){
 			updateTimer(timerVal);
@@ -392,7 +392,6 @@ function bruteThink(){
 		}));
 	pages.push(generateStandardPage("Have everyone share their list"));
 	pages.push(generateStandardPage("By forcing connections between these two things, you can get a different perspective."));
-
 	readFile(text_file, function(data){
 		dictionary = storeDictionary(data);
 	});
