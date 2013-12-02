@@ -373,8 +373,8 @@ function bruteThink(){
 	pages.push(generateStandardPage("Brute Think", "Ingredients&#58", ["paper and pens", "1-5 people", "a problem you want to reframe stated in the form of a question,","for example:","How can I increase traffic to my website?","How do I improve relationship with my boss?","How can I get my kids to eat vegetables?"]));
 	pages.push(generateStandardPage("Let's Get Started!", "Basic Rules&#58", ["focus on quantity", "withhold criticism", "welcome unusual ideas"]));
 	pages.push(generateRandomWordPage("Pick a Random Word!"));
-	pages.push(generateStandardPage("Write down a list of things that are associated with <span style ='color: #FF8000'>" + currentWord + "</span>. What are its characteristics? What does it do? What can you do with it?"));
-	pages.push(generateStandardPage("Draw a picture of <span style= 'color: #FF8000'>" + currentWord + "</span> and think about similarities, connections, and associations between <span style= 'color: #FF8000'>" + currentWord + "</span> and your problem"));
+	pages.push(generateStandardPage("Write down a list of things that are associated with <span class = 'randomWordColor'>" + currentWord + "</span>. What are its characteristics? What does it do? What can you do with it?"));
+	pages.push(generateStandardPage("Draw a picture of <span class = 'randomWordColor'>" + currentWord + "</span> and think about similarities, connections, and associations between <span class = 'randomWordColor'>" + currentWord + "</span> and your problem"));
 	pages.push(generateSetTimerPage("List your ideas", timerVal,
 		function(){
 			updateTimer(timerVal);
