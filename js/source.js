@@ -1,3 +1,43 @@
+function preOpeningPage(){
+	$(".backButton").off("click");
+	$(".nextButton").off("click");
+	$(".restartButton").off("click");
+	$(".pageContent").off("click");
+	$(".backButton").hide();
+	$(".nextButton").hide();
+	$(".restartButton").hide();
+	var page = $("<div class='pageContent'>");
+	page.append("<h2>Welcome to the Brainstormer! Is this your first time?</h2>");
+	page.append("<div class='firstPage'></div>");
+	var tlist = page.find(".firstPage");
+	tlist.append("<div class='technique'><img src='css/img/BackButton.png' id='No' class='techniqueImg'><div class='techniqueDesc'><p>No</p></div></div>");
+	tlist.append("<div class='technique'><img src='css/img/ForwardButton.png' id='Yes' class='techniqueImg'><div class='techniqueDesc'><p>Yes</p></div></div>");
+	$(".pageContent").html(page.html());
+
+	$("#Yes").on("click", function(){
+		preOpeningPage2();
+	});
+	$("#No").on("click", function(){
+		openingPage();
+	});
+}
+
+function preOpeningPage2(){
+	$(".backButton").off("click");
+	$(".nextButton").off("click");
+	$(".restartButton").off("click");
+	$(".pageContent").off("click");
+	$(".backButton").hide();
+	$(".nextButton").hide();
+	$(".restartButton").hide();
+	var page = $("<div class='pageContent'>");
+	page.append("<h2>Green team is insanely good looking</h2>");
+	page.append("<div class='firstPage'></div>");
+	var tlist = page.find(".firstPage");
+	$(".pageContent").html(page.html());
+
+}
+
 function openingPage(){
 	$(".backButton").off("click");
 	$(".nextButton").off("click");
@@ -6,6 +46,8 @@ function openingPage(){
 	$(".backButton").hide();
 	$(".nextButton").hide();
 	$(".restartButton").hide();
+
+
 
 	var page = $("<div class='pageContent'>");
 	page.append("<h2>Welcome!</h2>");
