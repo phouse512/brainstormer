@@ -112,7 +112,9 @@ function postIt(){
 			timerIntervalID = setInterval(function(){
 		        if(countdownTime == 0){
 		            clearInterval(timerIntervalID);
-		            backIntervalID = setInterval(bgFlashing, 500);
+		            if(page_counter == COUNTDOWN_PAGE){
+		        	    backIntervalID = setInterval(bgFlashing, 500);
+		        	}
 		        } else {
 		            countdownTime--;
 		        }
@@ -323,8 +325,9 @@ function threeInOne(){
 			updateTimer(countdownTime);
 			timerIntervalID = setInterval(function(){
 		        if(countdownTime == 0){
-		            clearInterval(timerIntervalID);
-		            backIntervalID = setInterval(bgFlashing, 500);
+		            clearInterval(timerIntervalID);if(page_counter == COUNTDOWN_PAGE){
+		        	    backIntervalID = setInterval(bgFlashing, 500);
+		        	}
 		        } else {
 		            countdownTime--;
 		        }
@@ -391,7 +394,9 @@ function bruteThink(){
 			timerIntervalID = setInterval(function(){
 		        if(countdownTime == 0){
 		            clearInterval(timerIntervalID);
-		            backIntervalID = setInterval(bgFlashing, 500);
+		            if(page_counter == COUNTDOWN_PAGE){
+		        	    backIntervalID = setInterval(bgFlashing, 500);
+		        	}
 		        } else {
 		            countdownTime--;
 		        }
