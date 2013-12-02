@@ -54,8 +54,32 @@ function postIt(){
 	pages.push(generateStandardPage("Post-It Brainstorm", "Ingredients&#58", ["post-it notes", "writing utensils", "brainstorming topic"]));
 	pages.push(generateStandardPage("Let's Get Started!", "Basic Rules&#58", ["focus on quantity", "withhold criticism", "welcome unusual ideas"]));
 	pages.push(generateStandardPage("Brief the group on the problem you would like to solve!"));
-	pages.push(generateSetTimerPage("Individually write ideas on post-its", timerVal));
-	pages.push(generateCountdownPage("", timerVal));
+	pages.push(generateSetTimerPage("Individually write ideas on post-its", timerVal, 
+		function(){
+			updateTimer(timerVal);
+		},
+		function(){
+			updateTimer(timerVal);
+			clearInterval(timerIntervalID);
+		}
+	));
+	pages.push(generateCountdownPage("", timerVal,
+		function(){
+			countdownTime = timerVal;
+			updateTimer(countdownTime);
+			timerIntervalID = setInterval(function(){
+		        if(countdownTime == 0){
+		            clearInterval(timerIntervalID);
+		            backIntervalID = setInterval(bgFlashing, 500);
+		        } else {
+		            countdownTime--;
+		        }
+		        updateTimer(countdownTime);
+		    }, 1000);
+		},
+		function(){
+			updateTimer(countdownTime);
+		}));
 	pages.push(generateStandardPage("Put Up Post-Its!"));
 	pages.push(generateStandardPage("", "Discuss Ideas&#58", ["Go one by one", "Explain each thought"]));
 	pages.push(generateStandardPage("", "Group Common Ideas", ["group by type", "i.e. location, theme"]));
@@ -88,13 +112,6 @@ function postIt(){
 		}
 		$(".pageContent").html(pages[page_counter]["html"].html());
 		pages[page_counter]["backFn"]();
-		if(page_counter == SET_TIMER_PAGE){
-			updateTimer(timerVal);
-			clearInterval(timerIntervalID);
-		}
-		if(page_counter == COUNTDOWN_PAGE){
-			updateTimer(countdownTime);
-		}
 	});
 	$(".nextButton").on("click", function(){
 		resetBG(backIntervalID);
@@ -106,22 +123,6 @@ function postIt(){
 		}
 		$(".pageContent").html(pages[page_counter]["html"].html());
 		pages[page_counter]["nextFn"]();
-		if(page_counter == SET_TIMER_PAGE){
-			updateTimer(timerVal);
-		}
-		if(page_counter == COUNTDOWN_PAGE){
-			countdownTime = timerVal;
-			updateTimer(countdownTime);
-			timerIntervalID = setInterval(function(){
-		        if(countdownTime == 0){
-		            clearInterval(timerIntervalID);
-		            backIntervalID = setInterval(bgFlashing, 500);
-		        } else {
-		            countdownTime--;
-		        }
-		        updateTimer(countdownTime);
-		    }, 1000);
-		}
 		if(page_counter == pages.length-1){
 			$(".restartButton").show();
 		}
@@ -335,8 +336,21 @@ function bruteThink(){
 	pages.push(generateRandomWordPage("Pick a Random Word!"));
 	pages.push(generateStandardPage("Think about the variety of things that are associated with <span>" + currentWord + "</span>. What are its characteristics? What does it do? What can you do with it?"));
 	pages.push(generateStandardPage("Draw a picture of <span>" + currentWord + "</span> and think about similarities, connections, and associations between <span>" + currentWord + "</span> and your problem"));
-	pages.push(generateSetTimerPage("List your ideas", timerVal));
-	pages.push(generateCountdownPage("", timerVal));
+	pages.push(generateSetTimerPage("List your ideas", timerVal,
+		function(){
+			updateTimer(timerVal);
+		},
+		function(){
+			updateTimer(timerVal);
+			clearInterval(timerIntervalID);
+		}));
+	pages.push(generateCountdownPage("", timerVal, 
+		function(){
+
+		},
+		function(){
+			updateTimer(countdownTime);
+		}));
 	pages.push(generateStandardPage("Have everyone share their list"));
 	pages.push(generateStandardPage("By forcing connections between these two things, you can get a different perspective."));
 
@@ -370,13 +384,6 @@ function bruteThink(){
 			return;
 		}
 		$(".pageContent").html(pages[page_counter]["html"].html());
-		if(page_counter == SET_TIMER_PAGE){
-			updateTimer(timerVal);
-			clearInterval(timerIntervalID);
-		}
-		if(page_counter == COUNTDOWN_PAGE){
-			updateTimer(countdownTime);
-		}
 	});
 	$(".nextButton").on("click", function(){
 		resetBG(backIntervalID);
@@ -393,9 +400,6 @@ function bruteThink(){
 			}
 		}
 		$(".pageContent").html(pages[page_counter]["html"].html());
-		if(page_counter == SET_TIMER_PAGE){
-			updateTimer(timerVal);
-		}
 		if(page_counter == COUNTDOWN_PAGE){
 			countdownTime = timerVal;
 			updateTimer(countdownTime);
@@ -469,6 +473,16 @@ function generateSetTimerPage(heading, defaultTime, nextAction, backAction){
 		page.find(".timerContainer").html("<div class='timerDisplay'><h4>Set Time</h4><div class='timerButtons'><button class='btn btn-info iconButton upButton'></button><button class='btn btn-info iconButton downButton'></button></div><div class='clock'>" + minute + " : " + secondsTens + secondsOnes + "</div></div>");
 	}
 	page_obj["html"] = page;
+	if(nextAction){
+		page_obj["nextFn"] = nextAction;
+	} else {
+		page_obj["nextFn"] = function(){};
+	}
+	if(backAction){
+		page_obj["backFn"] = backAction;
+	} else {
+		page_obj["backFn"] = function(){};
+	}
 	return page_obj;
 }
 
@@ -498,6 +512,16 @@ function generateCountdownPage(heading, defaultTime, nextAction, backAction){
 		page.find(".timerContainer").html("<div class='timerDisplay'><div class='clock'>" + minute + " : " + secondsTens + secondsOnes + "</div></div>");
 	}
 	page_obj["html"] = page;
+	if(nextAction){
+		page_obj["nextFn"] = nextAction;
+	} else {
+		page_obj["nextFn"] = function(){};
+	}
+	if(backAction){
+		page_obj["backFn"] = backAction;
+	} else {
+		page_obj["backFn"] = function(){};
+	}
 	return page_obj;
 }
 
@@ -542,6 +566,16 @@ function generateInputPage(prompt, placeholder, nextAction, backAction){
 		form.append("<input type=" + placeholder + " class='form-control inputSpace' id='" + placeholder + i + "' placeholder='" + placeholder + "'>");
 	}
 	page_obj["html"] = page;
+	if(nextAction){
+		page_obj["nextFn"] = nextAction;
+	} else {
+		page_obj["nextFn"] = function(){};
+	}
+	if(backAction){
+		page_obj["backFn"] = backAction;
+	} else {
+		page_obj["backFn"] = function(){};
+	}
 	return page_obj;
 }
 
@@ -554,6 +588,16 @@ function generateRandomWordPage(heading, nextAction, backAction){
 	page.append("<div class='randomWord'></div>");
 	page.append("<button class='btn btn-success randomButton'>Pick Again!</button>");
 	page_obj["html"] = page;
+	if(nextAction){
+		page_obj["nextFn"] = nextAction;
+	} else {
+		page_obj["nextFn"] = function(){};
+	}
+	if(backAction){
+		page_obj["backFn"] = backAction;
+	} else {
+		page_obj["backFn"] = function(){};
+	}
 	return page_obj;
 }
 
@@ -564,6 +608,7 @@ function updateTimer(timerVal){
 	var secondsOnes = seconds-secondsTens*10
 	
 	$(".clock").html(minute + ":" + secondsTens + secondsOnes);
+	console.log("update Timer");
 }
 
 function readFile(file, callback){
