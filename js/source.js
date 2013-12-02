@@ -697,7 +697,7 @@ function storeDictionary(textData){
 }
 
 function bgFlashing(){
-	var colors = ["#0099cc","#fff"];
+	var colors = ["#FF8000","#fff"];
 
 	var bodybgarrayno = Math.floor(Math.random() * colors.length);
     var selectedcolor = colors[bodybgarrayno];
