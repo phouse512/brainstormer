@@ -49,67 +49,22 @@ function postIt(){
 	var backIntervalID;
 	var SET_TIMER_PAGE = 3;
 	var COUNTDOWN_PAGE = 4;
-	var RESTART_PAGE = 2; //the page that you jump to when you hit restart
+	var RESTART_PAGE = 3; //the page that you jump to when you hit restart
 
-	pages.push(generateStandardPage("Post-It Brainstorm", "Ingredients&#58", ["post-it notes", "writing utensils", "brainstorming topic"]));
+	pages.push(generateStandardPage("Post-It Brainstorm", "Ingredients&#58", ["post-it notes", "writing utensils", "3+ people", "open wall", "brainstorming topic"]));
 	pages.push(generateStandardPage("Let's Get Started!", "Basic Rules&#58", ["focus on quantity", "withhold criticism", "welcome unusual ideas"]));
 	pages.push(generateStandardPage("Brief the group on the problem you would like to solve!"));
-	pages.push(generateSetTimerPage("Individually write ideas on post-its", timerVal));
-	pages.push(generateCountdownPage("", timerVal));
-	pages.push(generateStandardPage("Put Up Post-Its!"));
-	pages.push(generateStandardPage("", "Discuss Ideas&#58", ["Go one by one", "Explain each thought"]));
-	pages.push(generateStandardPage("", "Group Common Ideas", ["group by type", "i.e. location, theme"]));
-
-
-	$(".backButton").off("click");
-	$(".nextButton").off("click");
-	$(".restartButton").off("click");
-	$(".restartButton").hide();
-	$(".backButton").show();
-	$(".nextButton").show();
-	$(".pageContent").off("click");
-	$(".restartButton").on("click", function(){
-		page_counter = RESTART_PAGE;
-		clearInterval(timerIntervalID);
-		$(".restartButton").hide();
-		$(".pageContent").html(pages[page_counter]["html"].html());
-	});
-	$(".backButton").on("click", function(){
-		resetBG(backIntervalID);
-		if(page_counter > 0){
-			if(page_counter == pages.length-1){
-				$(".restartButton").hide();
-			}
-			page_counter--;
-		} else {
-			clearInterval(timerIntervalID);
-			openingPage();
-			return;
-		}
-		$(".pageContent").html(pages[page_counter]["html"].html());
-		pages[page_counter]["backFn"]();
-		if(page_counter == SET_TIMER_PAGE){
+	pages.push(generateSetTimerPage("Tell everyone to individually write ideas on ideas on post-its. Write or draw one idea per post-it. Set timer from 1 to 5 minutes.", timerVal, 
+		function(){
+			updateTimer(timerVal);
+		},
+		function(){
 			updateTimer(timerVal);
 			clearInterval(timerIntervalID);
 		}
-		if(page_counter == COUNTDOWN_PAGE){
-			updateTimer(countdownTime);
-		}
-	});
-	$(".nextButton").on("click", function(){
-		resetBG(backIntervalID);
-		page_counter++;
-		if(page_counter >= pages.length){
-			clearInterval(timerIntervalID);
-			openingPage();
-			return;
-		}
-		$(".pageContent").html(pages[page_counter]["html"].html());
-		pages[page_counter]["nextFn"]();
-		if(page_counter == SET_TIMER_PAGE){
-			updateTimer(timerVal);
-		}
-		if(page_counter == COUNTDOWN_PAGE){
+	));
+	pages.push(generateCountdownPage("Starting timer countdown!", timerVal,
+		function(){
 			countdownTime = timerVal;
 			updateTimer(countdownTime);
 			timerIntervalID = setInterval(function(){
@@ -121,7 +76,48 @@ function postIt(){
 		        }
 		        updateTimer(countdownTime);
 		    }, 1000);
+		},
+		function(){
+			updateTimer(countdownTime);
+		}));
+	pages.push(generateStandardPage("Put Up Post-Its! Everyone please place them on the wall and gather around to discuss"));
+	pages.push(generateStandardPage("", "Discuss Ideas&#58", ["Go one by one", "Explain each thought", "keep it brief"]));
+	pages.push(generateStandardPage("", "Group Common Ideas", ["Group by type", "i.e. location, theme"]));
+	pages.push(generateStandardPage("Now focus on the best ideas or grouped themes and reframe your problem as a team. Press back to start a new iteration or press forward to file away your ideas and return to the main menu."));
+
+
+	$(".backButton").off("click");
+	$(".nextButton").off("click");
+	$(".backButton").show();
+	$(".nextButton").show();
+	$(".pageContent").off("click");
+	$(".backButton").on("click", function(){
+		resetBG(backIntervalID);
+		if(page_counter > 0){
+			page_counter--;
+		} else {
+			clearInterval(timerIntervalID);
+			openingPage();
+			return;
 		}
+		if(page_counter == pages.length-2){
+			page_counter = RESTART_PAGE;
+			clearInterval(timerIntervalID);
+			$(".pageContent").html(pages[page_counter]["html"].html());
+		}
+		$(".pageContent").html(pages[page_counter]["html"].html());
+		pages[page_counter]["backFn"]();
+	});
+	$(".nextButton").on("click", function(){
+		resetBG(backIntervalID);
+		page_counter++;
+		if(page_counter >= pages.length){
+			clearInterval(timerIntervalID);
+			openingPage();
+			return;
+		}
+		$(".pageContent").html(pages[page_counter]["html"].html());
+		pages[page_counter]["nextFn"]();
 		if(page_counter == pages.length-1){
 			$(".restartButton").show();
 		}
@@ -330,13 +326,28 @@ function bruteThink(){
 	var dictionary = [];
 	var pagesRequiringUpdates = [3, 4]; //contains the index of every page that has currentWord in it, so that we can update them when currentWord changes
 
+	var query = "https://www.google.com/search?q="+currentWord+"&rlz=1C1LENN_enUS500US500&espv=210&es_sm=122&source=lnms&tbm=isch&sa=X&ei=Yl-ZUtjCLoj6oASM8YH4CA&ved=0CAkQ_AUoAQ&biw=1364&bih=706";
+
 	pages.push(generateStandardPage("Brute Think", "Ingredients&#58", ["paper and pens", "1-5 people", "a problem you want to reframe stated in the form of a question,","for example:","How can I increase traffic to my website?","How do I improve relationship with my boss?","How can I get my kids to eat vegetables?"]));
 	pages.push(generateStandardPage("Let's Get Started!", "Basic Rules&#58", ["focus on quantity", "withhold criticism", "welcome unusual ideas"]));
 	pages.push(generateRandomWordPage("Pick a Random Word!"));
 	pages.push(generateStandardPage("Write down a list of things that are associated with <span style ='color: #FF8000'>" + currentWord + "</span>. What are its characteristics? What does it do? What can you do with it?"));
 	pages.push(generateStandardPage("Draw a picture of <span style= 'color: #FF8000'>" + currentWord + "</span> and think about similarities, connections, and associations between <span style= 'color: #FF8000'>" + currentWord + "</span> and your problem"));
-	pages.push(generateSetTimerPage("List your ideas", timerVal));
-	pages.push(generateCountdownPage("", timerVal));
+	pages.push(generateSetTimerPage("List your ideas", timerVal,
+		function(){
+			updateTimer(timerVal);
+		},
+		function(){
+			updateTimer(timerVal);
+			clearInterval(timerIntervalID);
+		}));
+	pages.push(generateCountdownPage("", timerVal, 
+		function(){
+
+		},
+		function(){
+			updateTimer(countdownTime);
+		}));
 	pages.push(generateStandardPage("Have everyone share their list"));
 	pages.push(generateStandardPage("By forcing connections between these two things, you can get a different perspective."));
 	readFile(text_file, function(data){
@@ -369,13 +380,6 @@ function bruteThink(){
 			return;
 		}
 		$(".pageContent").html(pages[page_counter]["html"].html());
-		if(page_counter == SET_TIMER_PAGE){
-			updateTimer(timerVal);
-			clearInterval(timerIntervalID);
-		}
-		if(page_counter == COUNTDOWN_PAGE){
-			updateTimer(countdownTime);
-		}
 	});
 	$(".nextButton").on("click", function(){
 		resetBG(backIntervalID);
@@ -392,9 +396,6 @@ function bruteThink(){
 			}
 		}
 		$(".pageContent").html(pages[page_counter]["html"].html());
-		if(page_counter == SET_TIMER_PAGE){
-			updateTimer(timerVal);
-		}
 		if(page_counter == COUNTDOWN_PAGE){
 			countdownTime = timerVal;
 			updateTimer(countdownTime);
@@ -468,6 +469,16 @@ function generateSetTimerPage(heading, defaultTime, nextAction, backAction){
 		page.find(".timerContainer").html("<div class='timerDisplay'><h4>Set Time</h4><div class='timerButtons'><button class='btn btn-info iconButton upButton'></button><button class='btn btn-info iconButton downButton'></button></div><div class='clock'>" + minute + " : " + secondsTens + secondsOnes + "</div></div>");
 	}
 	page_obj["html"] = page;
+	if(nextAction){
+		page_obj["nextFn"] = nextAction;
+	} else {
+		page_obj["nextFn"] = function(){};
+	}
+	if(backAction){
+		page_obj["backFn"] = backAction;
+	} else {
+		page_obj["backFn"] = function(){};
+	}
 	return page_obj;
 }
 
@@ -497,6 +508,45 @@ function generateCountdownPage(heading, defaultTime, nextAction, backAction){
 		page.find(".timerContainer").html("<div class='timerDisplay'><div class='clock'>" + minute + " : " + secondsTens + secondsOnes + "</div></div>");
 	}
 	page_obj["html"] = page;
+	if(nextAction){
+		page_obj["nextFn"] = nextAction;
+	} else {
+		page_obj["nextFn"] = function(){};
+	}
+	if(backAction){
+		page_obj["backFn"] = backAction;
+	} else {
+		page_obj["backFn"] = function(){};
+	}
+	return page_obj;
+}
+
+function generateFinalPage(h2, h3, listArray, nextAction, backAction){
+	var page_obj = {};
+	var page = $("<div class='pageContent'><div class='heading'>");
+	if(h2){
+		page.find('.heading').append("<h2>" + h2 + "</h2>");
+	}
+	if(h3){
+		page.find('.heading').append("<h3>" + h3 + "</h3>");
+	}
+	if(listArray){
+		var listHTML = "<ul>";
+		for(i = 0; i < listArray.length; i++){
+			listHTML += "<li>" + listArray[i] + "</li>";
+		}
+		listHTML += "</ul>";
+		page.append(listHTML);
+	}
+	page_obj["html"] = page;
+	page_obj["nextFn"] = function(){
+		if(nextAction) nextAction();
+		dynamicHeight();
+	}
+	page_obj["backFn"] = function(){
+		if(backAction) backAction();
+		dynamicHeight();
+	}
 	return page_obj;
 }
 
@@ -541,6 +591,16 @@ function generateInputPage(prompt, placeholder, nextAction, backAction){
 		form.append("<input type=" + placeholder + " class='form-control inputSpace' id='" + placeholder + i + "' placeholder='" + placeholder + "'>");
 	}
 	page_obj["html"] = page;
+	if(nextAction){
+		page_obj["nextFn"] = nextAction;
+	} else {
+		page_obj["nextFn"] = function(){};
+	}
+	if(backAction){
+		page_obj["backFn"] = backAction;
+	} else {
+		page_obj["backFn"] = function(){};
+	}
 	return page_obj;
 }
 
@@ -553,6 +613,16 @@ function generateRandomWordPage(heading, nextAction, backAction){
 	page.append("<div class='randomWord'></div>");
 	page.append("<button class='btn btn-success randomButton'>Pick Again!</button>");
 	page_obj["html"] = page;
+	if(nextAction){
+		page_obj["nextFn"] = nextAction;
+	} else {
+		page_obj["nextFn"] = function(){};
+	}
+	if(backAction){
+		page_obj["backFn"] = backAction;
+	} else {
+		page_obj["backFn"] = function(){};
+	}
 	return page_obj;
 }
 
@@ -563,6 +633,7 @@ function updateTimer(timerVal){
 	var secondsOnes = seconds-secondsTens*10
 	
 	$(".clock").html(minute + ":" + secondsTens + secondsOnes);
+	console.log("update Timer");
 }
 
 function readFile(file, callback){
