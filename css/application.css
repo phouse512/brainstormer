@@ -56,6 +56,26 @@ body, html {
 	height: 75px;
 }
 
+.techniqueHomeLogo {
+	background: url("img/Brainstormer.png");
+	background-size: 250px 250px;
+	background-position: center;
+	background-repeat: no-repeat;
+	padding: 5px;
+	margin-top: 50px;
+	margin-bottom: 25px;
+	height: 300px;
+	width: 300px;
+	margin-left:auto;
+	margin-right: auto;
+}
+
+.techniqueHome {
+	padding: 5px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
 #bruteThink {
 	width: 145px;
 	height: 145px;
@@ -200,6 +220,11 @@ body, html {
 
 .randomButton {
 	font-size: 2em;
+}
+.homeButton{
+	font-size: 2em;
+	padding-left: 50px;	
+	padding-right: 50px;
 }
 /*
 body, html {

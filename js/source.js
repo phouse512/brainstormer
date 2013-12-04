@@ -8,10 +8,16 @@ function preOpeningPage(){
 	$(".restartButton").hide();
 	var page = $("<div class='pageContent'>");
 	page.append("<h2>Welcome to the Brainstormer! Is this your first time?</h2>");
+
 	page.append("<div class='firstPage'></div>");
 	var tlist = page.find(".firstPage");
-	tlist.append("<div class='technique'><img src='css/img/BackButton.png' id='No' class='techniqueImg'><div class='techniqueDesc'><p>No</p></div></div>");
-	tlist.append("<div class='technique'><img src='css/img/ForwardButton.png' id='Yes' class='techniqueImg'><div class='techniqueDesc'><p>Yes</p></div></div>");
+	//tlist.append("<div class='technique'><img src='css/img/BackButton.png' id='No' class='techniqueImg'><div class='techniqueDesc'><p>No</p></div></div>");
+	//tlist.append("<div class='technique'><img src='css/img/ForwardButton.png' id='Yes' class='techniqueImg'><div class='techniqueDesc'><p>Yes</p></div></div>");
+	//page.append("<button class='btn btn-success randomButton' id = 'Yes'>Yes</button>");
+	//page.append("<button class='btn btn-success randomButton' id = 'No'>No</button>");
+	tlist.append("<div class='techniqueHomeLogo'></div>");
+	tlist.append("<div class='techniqueHome'><button class='btn btn-success homeButton' id = 'Yes'>Yes</button><div class='techniqueDesc'></div></div>");
+	tlist.append("<div class='techniqueHome'><button class='btn btn-success homeButton' id = 'No'>No</button><div class='techniqueDesc'></div></div>");
 	$(".pageContent").html(page.html());
 
 	$("#Yes").on("click", function(){
