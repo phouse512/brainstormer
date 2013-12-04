@@ -390,7 +390,7 @@ function bruteThink(){
 	var currentWord = ""
 	var text_file = "brutethink-nouns.txt";
 	var dictionary = [];
-	var pagesRequiringUpdates = [3, 4]; //contains the index of every page that has currentWord in it, so that we can update them when currentWord changes
+	var pagesRequiringUpdates = [3, 5]; //contains the index of every page that has currentWord in it, so that we can update them when currentWord changes
 
 	var query = "https://www.google.com/search?q="+currentWord+"&rlz=1C1LENN_enUS500US500&espv=210&es_sm=122&source=lnms&tbm=isch&sa=X&ei=Yl-ZUtjCLoj6oASM8YH4CA&ved=0CAkQ_AUoAQ&biw=1364&bih=706";
 
@@ -418,8 +418,10 @@ function bruteThink(){
 			$(".upButton").hide();
 			$(".downButton").hide();
 		}));*/
-	pages.push(generateCountdownPage("", timerVal, 
+	pages.push(generateCountdownPage("Need a hint? Draw picture of <span class='randomWordColor'>" + currentWord + "</span> to force connections", timerVal, 
 		function(){
+			clearInterval(timerIntervalID);
+			$(".timerHeader").hide();
 			countdownTime = timerVal;
 			updateTimer(countdownTime);
 			timerIntervalID = setInterval(function(){
@@ -430,12 +432,20 @@ function bruteThink(){
 		        	}
 		        } else {
 		            countdownTime--;
+		            if(countdownTime == 180){
+		            	$(".timerHeader").show();
+		            }
 		        }
 		        updateTimer(countdownTime);
 		    }, 1000);
 		},
 		function(){
 			updateTimer(countdownTime);
+			if(countdownTime <= 180){
+				$(".timerHeader").show();
+			} else {
+				$(".timerHeader").hide();
+			}
 		}));
 	pages.push(generateStandardPage("Have everyone share their list"));
 	pages.push(generateFinalPage("By forcing connections between these two things, you can get a different perspective.", "Try again with a different word?", "Return to main menu?"));
