@@ -574,7 +574,7 @@ function generateCountdownPage(heading, defaultTime, nextAction, backAction){
 	return page_obj;
 }
 
-function generateFinalPage(h2, h3, listArray, nextAction, backAction){
+function generateFinalPage(heading, repeatText, exitText, nextAction, backAction){
 	var page_obj = {};
 	var page = $("<div class='pageContent'><div class='heading'>");
 	if(h2){

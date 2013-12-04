@@ -58,14 +58,14 @@ body, html {
 
 .techniqueHomeLogo {
 	background: url("img/Brainstormer.png");
-	background-size: 250px 250px;
+	background-size: 100px 100px;
 	background-position: center;
 	background-repeat: no-repeat;
 	padding: 5px;
 	margin-top: 50px;
 	margin-bottom: 25px;
-	height: 300px;
-	width: 300px;
+	height: 100px;
+	width: 100px;
 	margin-left:auto;
 	margin-right: auto;
 }
@@ -74,9 +74,10 @@ body, html {
 	padding: 5px;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	position: relative;
 }
 .homeLayout{
-	height: 640px;
+	height: 350px;
 	margin-top: 20px;
 	text-align: left;
 	vertical-align: 10%;
@@ -91,28 +92,28 @@ overflow: auto;
 
 .postItPic {
 	background: url("img/NewIcons/photo 2.jpg");
-	background-size: 300px 300px;
+	background-size: 200px 150px;
 	background-position: center;
 	background-repeat: no-repeat;
 	padding: 5px;
 	margin-top: 20px;
 	margin-bottom: 25px;
-	height: 300px;
-	width: 300px;
+	height: 150px;
+	width: 200px;
 	margin-left:auto;
 	margin-right: auto;
 }
 
 .postItPic2 {
 	background: url("img/NewIcons/photo 1.jpg");
-	background-size: 300px 300px;
+	background-size: 200px 150px;
 	background-position: center;
 	background-repeat: no-repeat;
 	padding: 5px;
 	margin-top: 20px;
 	margin-bottom: 25px;
-	height: 300px;
-	width: 300px;
+	height: 150px;
+	width: 200px;
 	margin-left:auto;
 	margin-right: auto;
 }
