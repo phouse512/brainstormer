@@ -135,8 +135,8 @@ function postIt(){
 			updateTimer(countdownTime);
 		}));
 	pages.push(generateStandardPage("Put Up Post-Its! Everyone please place them on the wall and gather around to discuss <div class = 'postItPic'>"));
-	pages.push(generateStandardPage("", "Discuss Ideas&#58", ["Go one by one", "Explain each thought", "keep it brief"]));
-	pages.push(generateStandardPage("", "Group Common Ideas ", ["Group by type", "i.e. location, theme <div class = 'postItPic2'>"]));
+	pages.push(generateStandardPage("Discuss Ideas&#58", "", ["Go one by one", "Explain each thought", "keep it brief"]));
+	pages.push(generateStandardPage("Group Common Ideas", "", ["Group by type", "i.e. location, theme <div class = 'postItPic2'>"]));
 	pages.push(generateFinalPage("Now Focus on the best ideas or grouped themes and reframe your problem as a team", "Do another iteration and expand on your new ideas?", "File away your ideas and return to the main menu?"));
 
 
@@ -175,7 +175,7 @@ function postIt(){
 		}
 	});
 	$(".pageContent").on("click", ".upButton", function(){
-		if(timerVal < 570){
+		if(timerVal < 300){
             timerVal += 30;
         }
         updateTimer(timerVal);
@@ -404,7 +404,7 @@ function bruteThink(){
 				$(".randomWord").html(currentWord);
 			}
 		}));
-	pages.push(generateStandardPage("Write down a list of things that are associated with <span class = 'randomWordColor'>" + currentWord + "</span>. What are its characteristics? What does it do? What can you do with it?"));
+	pages.push(generateStandardPage("<p>Write down a list of things that are associated with <span class = 'randomWordColor'>" + currentWord + "</span>.</p> <p>What are its characteristics?</p> <p>What does it do?</p> <p>What can you do with it?</p>"));
 	pages.push(generateStandardPage("Force connections between your problem and the list you just made for 5 minutes. Press next to begin."));
 	/*pages.push(generateSetTimerPage("List your ideas", timerVal,
 		function(){
@@ -447,8 +447,8 @@ function bruteThink(){
 				$(".timerHeader").hide();
 			}
 		}));
-	pages.push(generateStandardPage("Have everyone share their list"));
-	pages.push(generateFinalPage("By forcing connections between these two things, you can get a different perspective.", "Try again with a different word?", "Return to main menu?"));
+	pages.push(generateStandardPage("Have each person share how their ideas might solve the original problem."));
+	pages.push(generateFinalPage("By forcing connections between these two things, you can get a different perspective.", "Would you like to try again with a different word?", "Return to main menu?"));
 	readFile(text_file, function(data){
 		dictionary = storeDictionary(data);
 	});
