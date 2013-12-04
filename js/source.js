@@ -137,7 +137,7 @@ function postIt(){
 	pages.push(generateStandardPage("Put Up Post-Its! Everyone please place them on the wall and gather around to discuss <div class = 'postItPic'>"));
 	pages.push(generateStandardPage("", "Discuss Ideas&#58", ["Go one by one", "Explain each thought", "keep it brief"]));
 	pages.push(generateStandardPage("", "Group Common Ideas ", ["Group by type", "i.e. location, theme <div class = 'postItPic2'>"]));
-	pages.push(generateStandardPage("Now focus on the best ideas or grouped themes and reframe your problem as a team. Press back to start a new iteration or press forward to file away your ideas and return to the main menu."));
+	pages.push(generateFinalPage("Now Focus on the best ideas or grouped themes and reframe your problem as a team", "Do another iteration and expand on your new ideas?", "File away your ideas and return to the main menu?"));
 
 
 	$(".backButton").off("click");
@@ -155,9 +155,7 @@ function postIt(){
 			return;
 		}
 		if(page_counter == pages.length-2){
-			page_counter = RESTART_PAGE;
-			clearInterval(timerIntervalID);
-			$(".pageContent").html(pages[page_counter]["html"].html());
+			$(".nextButton").show();
 		}
 		$(".pageContent").html(pages[page_counter]["html"].html());
 		pages[page_counter]["backFn"]();
@@ -173,7 +171,7 @@ function postIt(){
 		$(".pageContent").html(pages[page_counter]["html"].html());
 		pages[page_counter]["nextFn"]();
 		if(page_counter == pages.length-1){
-			$(".restartButton").show();
+			$(".nextButton").hide();
 		}
 	});
 	$(".pageContent").on("click", ".upButton", function(){
@@ -187,6 +185,19 @@ function postIt(){
             timerVal -= 30;
         }
         updateTimer(timerVal);
+	});
+	$(".pageContent").on("click", ".repeatButton", function(){
+		page_counter = RESTART_PAGE;
+		clearInterval(timerIntervalID);
+		resetBG(backIntervalID);
+		$(".nextButton").show();
+		$(".pageContent").html(pages[page_counter]["html"].html());
+		pages[page_counter]["nextFn"]();
+	});
+	$(".pageContent").on("click", ".exitButton", function(){
+		clearInterval(timerIntervalID);
+		resetBG(backIntervalID);
+		openingPage();
 	});
 
 	$(".pageContent").html(pages[page_counter]["html"].html());
@@ -427,7 +438,7 @@ function bruteThink(){
 			updateTimer(countdownTime);
 		}));
 	pages.push(generateStandardPage("Have everyone share their list"));
-	pages.push(generateStandardPage("By forcing connections between these two things, you can get a different perspective."));
+	pages.push(generateFinalPage("By forcing connections between these two things, you can get a different perspective.", "Try again with a different word?", "Return to main menu?"));
 	readFile(text_file, function(data){
 		dictionary = storeDictionary(data);
 	});
@@ -440,16 +451,14 @@ function bruteThink(){
 	$(".backButton").on("click", function(){
 		resetBG(backIntervalID);
 		if(page_counter > 0){
-			if(page_counter == pages.length-1){
-				page_counter = RESTART_PAGE;
-				clearInterval(timerIntervalID);
-				$(".pageContent").html(pages[page_counter]["html"].html());
-			}
 			page_counter--;
 		} else {
 			clearInterval(timerIntervalID);
 			openingPage();
 			return;
+		}
+		if(page_counter == pages.length-2){
+			$(".nextButton").show();
 		}
 		$(".pageContent").html(pages[page_counter]["html"].html());
 		pages[page_counter]["backFn"]();
@@ -464,6 +473,9 @@ function bruteThink(){
 		}
 		$(".pageContent").html(pages[page_counter]["html"].html());
 		pages[page_counter]["nextFn"]();
+		if(page_counter == pages.length-1){
+			$(".nextButton").hide();
+		}
 	});
 	$(".pageContent").on("click", ".upButton", function(){
 		if(timerVal < 570){
@@ -481,6 +493,20 @@ function bruteThink(){
 		currentWord = dictionary[Math.floor(Math.random()*dictionary.length)];
 		updatePages();
 		$(".randomWord").html(currentWord);
+	});
+	$(".pageContent").on("click", ".repeatButton", function(){
+		page_counter = RESTART_PAGE;
+		clearInterval(timerIntervalID);
+		resetBG(backIntervalID);
+		$(".nextButton").show();
+		$(".pageContent").html(pages[page_counter]["html"].html());
+		pages[page_counter]["nextFn"]();
+	});
+	$(".pageContent").on("click", ".exitButton", function(){
+		page_counter = RESTART_PAGE;
+		clearInterval(timerIntervalID);
+		resetBG(backIntervalID);
+		openingPage();
 	});
 
 	$(".pageContent").html(pages[page_counter]["html"].html());
@@ -576,21 +602,18 @@ function generateCountdownPage(heading, defaultTime, nextAction, backAction){
 
 function generateFinalPage(heading, repeatText, exitText, nextAction, backAction){
 	var page_obj = {};
+	var repeat = "";
+	var exit = "";
+	if(repeatText) repeat = repeatText;
+	if(exitText) exit = exitText;
 	var page = $("<div class='pageContent'><div class='heading'>");
-	if(h2){
-		page.find('.heading').append("<h2>" + h2 + "</h2>");
+	if(heading){
+		page.find('.heading').append("<h2>" + heading + "</h2>");
 	}
-	if(h3){
-		page.find('.heading').append("<h3>" + h3 + "</h3>");
-	}
-	if(listArray){
-		var listHTML = "<ul>";
-		for(i = 0; i < listArray.length; i++){
-			listHTML += "<li>" + listArray[i] + "</li>";
-		}
-		listHTML += "</ul>";
-		page.append(listHTML);
-	}
+	page.append("<div class='finalPageButtons'></div>");
+	var buttons = page.find(".finalPageButtons");
+	buttons.append("<button class='btn btn-success finalPageButton repeatButton'>" + repeat + "</button>");
+	buttons.append("<button class='btn btn-success finalPageButton exitButton'>" + exit + "</button>")
 	page_obj["html"] = page;
 	page_obj["nextFn"] = function(){
 		if(nextAction) nextAction();

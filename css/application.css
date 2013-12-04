@@ -269,6 +269,21 @@ overflow: auto;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
+.finalPageButtons {
+	margin:  25px auto 25px auto;
+}
+
+.finalPageButton, .finalPageButton:hover, .finalPageButton:focus {
+	white-space: normal;
+	width: 200px;
+	background: #fff;
+	color: #000;
+	border-color: #000;
+	display:block;
+	margin: 15px auto 15px auto;
+}
+
 /*
 body, html {
 	height: 100%;
