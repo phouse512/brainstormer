@@ -75,7 +75,47 @@ body, html {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+.homeLayout{
+	height: 640px;
+	margin-top: 20px;
+	text-align: left;
+	vertical-align: 10%;
+	position: relative;
+	overflow: hidden;
 
+
+}
+.homeLayout:hover{
+overflow: auto;
+}
+
+.postItPic {
+	background: url("img/NewIcons/photo 2.jpg");
+	background-size: 300px 300px;
+	background-position: center;
+	background-repeat: no-repeat;
+	padding: 5px;
+	margin-top: 20px;
+	margin-bottom: 25px;
+	height: 300px;
+	width: 300px;
+	margin-left:auto;
+	margin-right: auto;
+}
+
+.postItPic2 {
+	background: url("img/NewIcons/photo 1.jpg");
+	background-size: 300px 300px;
+	background-position: center;
+	background-repeat: no-repeat;
+	padding: 5px;
+	margin-top: 20px;
+	margin-bottom: 25px;
+	height: 300px;
+	width: 300px;
+	margin-left:auto;
+	margin-right: auto;
+}
 #bruteThink {
 	width: 145px;
 	height: 145px;

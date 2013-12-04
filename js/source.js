@@ -37,10 +37,14 @@ function preOpeningPage2(){
 	$(".nextButton").hide();
 	$(".restartButton").hide();
 	var page = $("<div class='pageContent'>");
-	page.append("<h2>Green team is insanely good looking</h2>");
+	page.append("<div class = 'homeLayout' <p>This app will help coach you through facilitating a group brainstorm. Do not be nervous, you can do this, and we are here to help you every step of the way.</p><br><p>On the following screen, there are two brainstorming methods you can choose from.</p><h3>Post-It Notes:</h3><br><p>This method is a classic brainstorm approach that combines quick individual idea generation with group discussion. You will find that individuals will come up with similar ideas for the problem. After you discuss the ideas as a group, you can cluster these common thoughts and keep refining your ideas to help solve your problem.</p><br><h3>Brute Think: </h3><br><p>This method allows you to reframe a problem by forcing connections with a random noun. The app will prompt you with a random word, and individually everyone will come up with ideas that connect the random word with the problem. After the individual ideas are shared, you will hopefully have discovered a new idea or way to solve your problem!</p><br><p>The app will coach you through either method step by step, and you will be amazed at how effective these tools can be. Good luck! </p></h3></div>");
+	page.append("<div class='techniqueHome'><button class='btn btn-success homeButton' id = 'Ok'>Ok</button><div class='techniqueDesc'></div></div>");
 	page.append("<div class='firstPage'></div>");
 	var tlist = page.find(".firstPage");
 	$(".pageContent").html(page.html());
+	$("#Ok").on("click", function(){
+	openingPage();
+	});
 
 }
 
@@ -130,9 +134,9 @@ function postIt(){
 		function(){
 			updateTimer(countdownTime);
 		}));
-	pages.push(generateStandardPage("Put Up Post-Its! Everyone please place them on the wall and gather around to discuss"));
+	pages.push(generateStandardPage("Put Up Post-Its! Everyone please place them on the wall and gather around to discuss <div class = 'postItPic'>"));
 	pages.push(generateStandardPage("", "Discuss Ideas&#58", ["Go one by one", "Explain each thought", "keep it brief"]));
-	pages.push(generateStandardPage("", "Group Common Ideas", ["Group by type", "i.e. location, theme"]));
+	pages.push(generateStandardPage("", "Group Common Ideas ", ["Group by type", "i.e. location, theme <div class = 'postItPic2'>"]));
 	pages.push(generateStandardPage("Now focus on the best ideas or grouped themes and reframe your problem as a team. Press back to start a new iteration or press forward to file away your ideas and return to the main menu."));
 
 
