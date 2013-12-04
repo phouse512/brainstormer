@@ -72,8 +72,8 @@ body, html {
 
 .techniqueHome {
 	padding: 5px;
-	margin-top: 25px;
-	margin-bottom: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 #bruteThink {
@@ -129,7 +129,7 @@ body, html {
 
 
 .backButton{
-	background: url("img/BackButton.png");
+	background: url("img/NewIcons/LeftButton.jpg");
 	background-size: 60px 60px;
 	height: 60px;
 	width: 60px;
@@ -138,12 +138,12 @@ body, html {
 }
 
 .backButton:hover, .backButton:focus{
-	background: url("img/BackButton.png");
+	background: url("img/NewIcons/LeftButton.jpg");
 	background-size: 60px 60px;
 }
 
 .nextButton{
-	background: url("img/ForwardButton.png");
+	background: url("img/NewIcons/RightButtons.jpg");
 	background-size: 60px 60px;
 	height: 60px;
 	width: 60px;
@@ -152,12 +152,12 @@ body, html {
 }
 
 .nextButton:hover, .nextButton:focus{
-	background: url("img/ForwardButton.png");
+	background: url("img/NewIcons/RightButtons.jpg");
 	background-size: 60px 60px;
 }
 
 .upButton{
-	background: url("img/Up Buttons.png");
+	background: url("img/NewIcons/Up Buttons.jpg");
 	background-size: 25px 25px;
 	height:25px;
 	width: 25px;
@@ -166,12 +166,12 @@ body, html {
 }
 
 .upButton:hover, .upButton:focus{
-	background: url("img/Up Buttons.png");
+	background: url("img/NewIcons/Up Buttons.jpg");
 	background-size: 25px 25px;
 }
 
 .downButton{
-	background: url("img/DownButtons.png");
+	background: url("img/NewIcons/DownButtons.jpg");
 	background-size: 25px 25px;
 	height:25px;
 	width: 25px;
@@ -179,7 +179,7 @@ body, html {
 }
 
 .downButton:hover, .downButton:focus{
-	background: url("img/DownButtons.png");
+	background: url("img/NewIcons/DownButtons.jpg");
 	background-size: 25px 25px;
 }
 
@@ -223,8 +223,10 @@ body, html {
 }
 .homeButton{
 	font-size: 2em;
-	padding-left: 50px;	
-	padding-right: 50px;
+	padding-left: 100px;	
+	padding-right: 100px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 /*
 body, html {

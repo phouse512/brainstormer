@@ -102,7 +102,7 @@ function postIt(){
 	pages.push(generateStandardPage("Post-It Brainstorm", "Ingredients&#58", ["post-it notes", "writing utensils", "3+ people", "open wall", "brainstorming topic"]));
 	pages.push(generateStandardPage("Let's Get Started!", "Basic Rules&#58", ["focus on quantity", "withhold criticism", "welcome unusual ideas"]));
 	pages.push(generateStandardPage("Brief the group on the problem you would like to solve!"));
-	pages.push(generateSetTimerPage("Tell everyone to individually write ideas on ideas on post-its. Write or draw one idea per post-it. Set timer from 1 to 5 minutes.", timerVal, 
+	pages.push(generateSetTimerPage("Have everyone individually write ideas on post-its; One idea per post-it. Set timer from 1 to 5 minutes.", timerVal, 
 		function(){
 			updateTimer(timerVal);
 		},
@@ -111,7 +111,7 @@ function postIt(){
 			clearInterval(timerIntervalID);
 		}
 	));
-	pages.push(generateCountdownPage("Starting timer countdown!", timerVal,
+	pages.push(generateCountdownPage("",timerVal,
 		function(){
 			countdownTime = timerVal;
 			updateTimer(countdownTime);
@@ -390,8 +390,8 @@ function bruteThink(){
 			}
 		}));
 	pages.push(generateStandardPage("Write down a list of things that are associated with <span class = 'randomWordColor'>" + currentWord + "</span>. What are its characteristics? What does it do? What can you do with it?"));
-	pages.push(generateStandardPage("Draw a picture of <span class = 'randomWordColor'>" + currentWord + "</span> and think about similarities, connections, and associations between <span class = 'randomWordColor'>" + currentWord + "</span> and your problem"));
-	pages.push(generateSetTimerPage("List your ideas", timerVal,
+	pages.push(generateStandardPage("Force connections between your problem and the list you just made for 5 minutes. Press next to begin."));
+	/*pages.push(generateSetTimerPage("List your ideas", timerVal,
 		function(){
 			updateTimer(timerVal);
 			$(".upButton").hide();
@@ -402,7 +402,7 @@ function bruteThink(){
 			clearInterval(timerIntervalID);
 			$(".upButton").hide();
 			$(".downButton").hide();
-		}));
+		}));*/
 	pages.push(generateCountdownPage("", timerVal, 
 		function(){
 			countdownTime = timerVal;
@@ -515,7 +515,7 @@ function generateSetTimerPage(heading, defaultTime, nextAction, backAction){
 		var secondsTens = Math.floor(seconds/10);
 		var secondsOnes = seconds-secondsTens*10;
 
-		page.find(".timerContainer").html("<div class='timerDisplay'><h4>Set Time</h4><div class='timerButtons'><button class='btn btn-info iconButton upButton'></button><button class='btn btn-info iconButton downButton'></button></div><div class='clock'>" + minute + " : " + secondsTens + secondsOnes + "</div></div>");
+		page.find(".timerContainer").html("<div class='timerDisplay'><h4></h4><div class='timerButtons'><button class='btn btn-info iconButton upButton'></button><button class='btn btn-info iconButton downButton'></button></div><div class='clock'>" + minute + " : " + secondsTens + secondsOnes + "</div></div>");
 	}
 	page_obj["html"] = page;
 	if(nextAction){
