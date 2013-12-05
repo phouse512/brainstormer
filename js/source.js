@@ -656,11 +656,11 @@ function generateStandardPage(h2, h3, listArray, nextAction, backAction){
 	page_obj["html"] = page;
 	page_obj["nextFn"] = function(){
 		if(nextAction) nextAction();
-		dynamicHeight();
+		//dynamicHeight();
 	}
 	page_obj["backFn"] = function(){
 		if(backAction) backAction();
-		dynamicHeight();
+		//dynamicHeight();
 	}
 	return page_obj;
 }
