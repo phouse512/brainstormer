@@ -83,12 +83,17 @@ function openingPage(){
 function dynamicHeight(){
 	console.log("Dynamic Height");
 	height = $(document).height();
+	console.log(height);
 	if(height > 750){
 		$("ul").css("line-height", "100px");
 	} else if (height < 750 & height > 400 ) {
 		$("ul").css("line-height", "60px");
 	} else {
 		$("ul").css("line-height", "40px");
+	}
+	if($(".pageContent").height() > height){
+		$("ul").css("line-height", "25px");
+		$("ul").css("font-size", "1em");
 	}
 }
 
@@ -656,11 +661,11 @@ function generateStandardPage(h2, h3, listArray, nextAction, backAction){
 	page_obj["html"] = page;
 	page_obj["nextFn"] = function(){
 		if(nextAction) nextAction();
-		//dynamicHeight();
+		dynamicHeight();
 	}
 	page_obj["backFn"] = function(){
 		if(backAction) backAction();
-		//dynamicHeight();
+		dynamicHeight();
 	}
 	return page_obj;
 }
